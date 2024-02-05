@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay Stub</title>
+</head>
+<body>
+
+<th:block th:each="stub : ${stubs}">
+    <li th:text="${stubs}"></li>
+</th:block>
+
+</body>
+</html>
