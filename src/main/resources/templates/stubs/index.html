@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Pay Stub</title>
+
 </head>
 <body>
 
-<th:block th:each="stub : ${stubs}">
-    <li th:text="${stubs}"></li>
-</th:block>
+<h1> Stubs </h1>
 
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Company Name</th>
+    </tr>
+    </thead>
+    <tr th:each="stub : ${stubs}">
+        <td th:text="${stub.name}"></td>
+    </tr>
+</table>
 </body>
 </html>

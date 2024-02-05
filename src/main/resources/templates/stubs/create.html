@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Stub</title>
+
+    <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
 
 <h1>Create Stub</h1>
 
-<form method="post" action="/stubs/create">
-    <input type="text" name="companyName" />
-    <input type="submit" value="Create Stub" />
+
+<form method="POST" action="/stubs/create">
+    <input type="text" name="companyName">
+    <input type="submit" value="Create Stub">
 </form>
 
 </body>
