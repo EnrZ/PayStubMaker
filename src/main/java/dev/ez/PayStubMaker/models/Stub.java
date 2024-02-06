@@ -3,9 +3,12 @@ package dev.ez.PayStubMaker.models;
 public class Stub {
 
     private String name;
+    private String employee;
 
-    public Stub(String name) {
+    //all arre required fields so a constructor with all will do
+    public Stub(String name,String employee) {
         this.name = name;
+        this.employee = employee;
     }
 
     public String getName() {
@@ -14,6 +17,14 @@ public class Stub {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(String employee) {
+        this.employee = employee;
     }
 
     @Override

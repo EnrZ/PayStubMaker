@@ -13,10 +13,12 @@
     <thead>
     <tr>
         <th>Company Name</th>
+        <th>Employee Name</th>
     </tr>
     </thead>
     <tr th:each="stub : ${stubs}">
         <td th:text="${stub.name}"></td>
+        <td th:text="${stub.employee}"></td>
     </tr>
 </table>
 </body>

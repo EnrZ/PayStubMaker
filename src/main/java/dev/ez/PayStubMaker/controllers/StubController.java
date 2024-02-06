@@ -31,8 +31,8 @@ public class StubController {
     }
 
     @PostMapping("create")
-    public String createStub(@RequestParam String companyName) {
-        stubs.add(new Stub (companyName));
+    public String createStub(@RequestParam String companyName, @RequestParam String companyEmployee) {
+        stubs.add(new Stub (companyName,companyEmployee));
         return "redirect:/stubs";
     }
 }
