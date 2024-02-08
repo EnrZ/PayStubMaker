@@ -3,10 +3,7 @@ package dev.ez.PayStubMaker.controllers;
 import dev.ez.PayStubMaker.models.Stub;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +17,15 @@ public class StubController {
     @GetMapping
     public String displayAllStubs(Model model){
         model.addAttribute("stubs" , stubs);
+
+        int total = 0;
+
+        for (int num: stubs.get(0).getHoursWorkedEachDay()){
+            total +=num;
+        }
+
+        model.addAttribute("total" , total);
+
         return "stubs/index";
     }
 
@@ -31,8 +37,8 @@ public class StubController {
     }
 
     @PostMapping("create")
-    public String createStub(@RequestParam String companyName, @RequestParam String companyEmployee) {
-        stubs.add(new Stub (companyName,companyEmployee));
+    public String createStub(@ModelAttribute Stub newStub) {
+        stubs.add(newStub);
         return "redirect:/stubs";
     }
 }

@@ -14,12 +14,59 @@
     <tr>
         <th>Company Name</th>
         <th>Employee Name</th>
+        <th>Check Number</th>
     </tr>
     </thead>
     <tr th:each="stub : ${stubs}">
         <td th:text="${stub.name}"></td>
         <td th:text="${stub.employee}"></td>
+        <td th:text="${stub.checkNumber}"></td>
     </tr>
 </table>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Pay Period</th>
+    </tr>
+    </thead>
+    <tr th:each="stub : ${stubs}">
+        <td th:text="${stub.payPeriod}"></td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Pay Day</th>
+    </tr>
+    </thead>
+    <tr th:each="stub : ${stubs}">
+        <td th:text="${stub.payDay}"></td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Hours Worked Each Day</th>
+    </tr>
+    </thead>
+    <tr th:each="stub : ${stubs}">
+        <td th:text="${stub.hoursWorkedEachDay}"></td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Total Hours</th>
+    </tr>
+    </thead>
+    <tr>
+        <td th:text="${total}"></td>
+    </tr>
+</table>
+
 </body>
 </html>
