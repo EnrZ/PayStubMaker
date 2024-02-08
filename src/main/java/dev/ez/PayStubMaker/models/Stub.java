@@ -1,5 +1,6 @@
 package dev.ez.PayStubMaker.models;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,16 +12,19 @@ public class Stub {
     private String payPeriod;
     private String payDay;
     private List<Integer> hoursWorkedEachDay = new ArrayList<>();
-
+    private Integer hourlyPayRate;
+    private BigDecimal yearlyPreviousGross;
 
 
     //all arre required fields so a constructor with all will do
-    public Stub(String name,String employee, String checkNumber, String payPeriod, String payDate, List<Integer> hoursWorkedEachDay) {
+    public Stub(String name,String employee, String checkNumber, String payPeriod, String payDate, List<Integer> hoursWorkedEachDay, Integer hourlyPayRate, BigDecimal yearlyPreviousGross) {
         this.name = name;
         this.employee = employee;
         this.checkNumber = checkNumber;
         this.payPeriod = payPeriod;
         this.payDay = payDay;
+        this.hourlyPayRate = hourlyPayRate;
+        this.yearlyPreviousGross = yearlyPreviousGross;
     }
 
 
@@ -70,6 +74,22 @@ public class Stub {
 
     public void setHoursWorkedEachDay(List<Integer> hoursWorkedEachDay) {
         this.hoursWorkedEachDay = hoursWorkedEachDay;
+    }
+
+    public double getHourlyPayRate() {
+        return hourlyPayRate;
+    }
+
+    public void setHourlyPayRate(Integer hourlyPayRate) {
+        this.hourlyPayRate = hourlyPayRate;
+    }
+
+    public BigDecimal getYearlyPreviousGross() {
+        return yearlyPreviousGross;
+    }
+
+    public void setYearlyPreviousGross(BigDecimal yearlyPreviousGross) {
+        this.yearlyPreviousGross = yearlyPreviousGross;
     }
 
     @Override

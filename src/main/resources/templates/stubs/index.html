@@ -9,7 +9,7 @@
 
 <h1> Stubs </h1>
 
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th>Company Name</th>
@@ -24,7 +24,7 @@
     </tr>
 </table>
 
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th>Pay Period</th>
@@ -35,7 +35,7 @@
     </tr>
 </table>
 
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th>Pay Day</th>
@@ -46,7 +46,7 @@
     </tr>
 </table>
 
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th>Hours Worked Each Day</th>
@@ -57,14 +57,42 @@
     </tr>
 </table>
 
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th>Total Hours</th>
+        <th>Hourly Pay Rate</th>
+        <th>Total Gross Income</th>
+    </tr>
+    </thead>
+    <tr th:each="stub : ${stubs}">
+        <td th:text="${totalHours}"></td>
+        <td th:text="${stub.hourlyPayRate}"></td>
+        <td th:text="${totalGrossIncome}"></td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Yearly Previous Gross Income</th>
+        <th>Year-to-Date Gross Income</th>
+    </tr>
+    </thead>
+    <tr th:each="stub : ${stubs}">
+        <td th:text="${stub.yearlyPreviousGross}"></td>
+        <td th:text="${YTDGrossIncome}"></td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Social Security Contribution</th>
     </tr>
     </thead>
     <tr>
-        <td th:text="${total}"></td>
+        <td th:text="${socSecContribution}"></td>
     </tr>
 </table>
 
