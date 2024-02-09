@@ -57,72 +57,72 @@
     </tr>
     </thead>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Starting Day </td>
         <td th:text="${stub.hoursWorkedEachDay[0]}"></td>
         <td th:text="${stub.timeOfDay[0]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Starting Day Plus One </td>
         <td th:text="${stub.hoursWorkedEachDay[1]}"></td>
         <td th:text="${stub.timeOfDay[1]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc  </td>
         <td th:text="${stub.hoursWorkedEachDay[2]}"></td>
         <td th:text="${stub.timeOfDay[2]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[3]}"></td>
         <td th:text="${stub.timeOfDay[3]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[4]}"></td>
         <td th:text="${stub.timeOfDay[4]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[5]}"></td>
         <td th:text="${stub.timeOfDay[5]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[6]}"></td>
         <td th:text="${stub.timeOfDay[6]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[7]}"></td>
         <td th:text="${stub.timeOfDay[7]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[8]}"></td>
         <td th:text="${stub.timeOfDay[8]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[9]}"></td>
         <td th:text="${stub.timeOfDay[9]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[10]}"></td>
         <td th:text="${stub.timeOfDay[10]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[11]}"></td>
         <td th:text="${stub.timeOfDay[11]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[12]}"></td>
         <td th:text="${stub.timeOfDay[12]}"></td>
     </tr>
     <tr th:each="stub : ${stubs}">
-        <td> Monday </td>
+        <td> Etc </td>
         <td th:text="${stub.hoursWorkedEachDay[13]}"></td>
         <td th:text="${stub.timeOfDay[13]}"></td>
     </tr>
@@ -164,11 +164,30 @@
     <tr>
         <th>Social Security Contribution</th>
         <th>Medicare Contribution</th>
+        <th>Federal Tax</th>
+        <th>State Tax</th>
+        <th>Current Total Deduction</th>
+        <th>Year-to-Date Deduction</th>
+    </tr>
+    </thead>
+    <tr th:each="stub : ${stubs}">
+        <td th:text="${socSecContribution}"></td>
+        <td th:text="${medicareContribution}"></td>
+        <td th:text="${stub.federalTax}"></td>
+        <td th:text="${stub.stateTax}"></td>
+        <td th:text="${currentTotalDeduction}"></td>
+        <td th:text="${YTDDeduction}"></td>
+    </tr>
+</table>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Net Pay</th>
     </tr>
     </thead>
     <tr>
-        <td th:text="${socSecContribution}"></td>
-        <td th:text="${medicareContribution}"></td>
+        <td th:text="${netPay}"></td>
     </tr>
 </table>
 

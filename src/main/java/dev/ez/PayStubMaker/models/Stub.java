@@ -17,9 +17,16 @@ public class Stub {
 
     private List<String> timeOfDay = new ArrayList<>();
 
+    //fed and state tax will be manual for now
+    private BigDecimal federalTax;
+    private BigDecimal stateTax;
+
+    private BigDecimal previousDeduction;
+
+
 
     //all arre required fields so a constructor with all will do
-    public Stub(String name,String employee, String checkNumber, String payPeriod, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<String> timeOfDay) {
+    public Stub(String name,String employee, String checkNumber, String payPeriod, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<String> timeOfDay, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions) {
         this.name = name;
         this.employee = employee;
         this.checkNumber = checkNumber;
@@ -27,6 +34,7 @@ public class Stub {
         this.payDay = payDay;
         this.hourlyPayRate = hourlyPayRate;
         this.yearlyPreviousGross = yearlyPreviousGross;
+        this.previousDeduction = previousDeduction;
     }
 
 
@@ -98,6 +106,30 @@ public class Stub {
 
     public void setTimeOfDay(List<String> timeOfDay) {
         this.timeOfDay = timeOfDay;
+    }
+
+    public BigDecimal getFederalTax() {
+        return federalTax;
+    }
+
+    public void setFederalTax(BigDecimal federalTax) {
+        this.federalTax = federalTax;
+    }
+
+    public BigDecimal getStateTax() {
+        return stateTax;
+    }
+
+    public void setStateTax(BigDecimal stateTax) {
+        this.stateTax = stateTax;
+    }
+
+    public BigDecimal getPreviousDeduction() {
+        return previousDeduction;
+    }
+
+    public void setPreviousDeduction(BigDecimal previousDeduction) {
+        this.previousDeduction = previousDeduction;
     }
 
     @Override

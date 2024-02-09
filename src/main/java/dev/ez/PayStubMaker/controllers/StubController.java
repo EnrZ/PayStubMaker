@@ -24,6 +24,9 @@ public class StubController {
         BigDecimal TGICalculations, YTDGICalculations, SOCSECCalculations, MCCalculations;
         BigDecimal totalGrossIncome, YTDGrossIncome, socSecContribution,medicareContribution;
         BigDecimal hourlyPayRateConverted;
+        BigDecimal federalTax, stateTax;
+        BigDecimal taxCalculations, contributionCalculations, deductionCalculations,currentTotalDeduction;
+        BigDecimal YTDDeduction, YTDDeductionCalculations, netPay, netPayCalculations;
 
         for (int num: stubs.get(0).getHoursWorkedEachDay()){
             totalHours +=num;
@@ -49,6 +52,20 @@ public class StubController {
         MCCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.0145));
         medicareContribution = MCCalculations.setScale(2, RoundingMode.UP);
         model.addAttribute("medicareContribution", medicareContribution);
+
+        taxCalculations = stubs.get(0).getFederalTax().add(stubs.get(0).getStateTax());
+        contributionCalculations = medicareContribution.add(socSecContribution);
+        deductionCalculations = taxCalculations.add(contributionCalculations);
+        currentTotalDeduction = deductionCalculations.setScale(2, RoundingMode.UP);
+        model.addAttribute("currentTotalDeduction", currentTotalDeduction);
+
+        YTDDeductionCalculations = currentTotalDeduction.add(stubs.get(0).getPreviousDeduction());
+        YTDDeduction = YTDDeductionCalculations.setScale(2, RoundingMode.UP);
+        model.addAttribute("YTDDeduction", YTDDeduction);
+
+        netPayCalculations = totalGrossIncome.subtract(currentTotalDeduction);
+        netPay = netPayCalculations.setScale(2, RoundingMode.UP);
+        model.addAttribute("netPay", netPay);
 
         return "stubs/index";
     }

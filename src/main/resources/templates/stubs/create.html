@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Stub</title>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:src="@{/script.js}"></script>
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
@@ -18,37 +19,24 @@
     Pay period Semimonthly
     Type in the specific pay period -> <input type="text" name="payPeriod">
     Type in the pay date -> <input type="text" name="payDay">
-    Monday <input type="number" name="hoursWorkedEachDay" value="4">
-    On this first Monday, they worked between the hours of: <input type="text" name="timeOfDay" value="8AM to 12PM">
-    Tuesday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this first Tuesday, they worked between the hours of: <input type="text" name="timeOfDay" value="N/A">
-    Wednesday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this first Wednesday, they worked between the hours of: <input type="text" name="timeOfDay" value="N/A">
-    Thursday <input type="number" name="hoursWorkedEachDay" value="4">
-    On this first Thursday, they worked between the hours of: <input type="text" name="timeOfDay" value="8AM to 12PM">
-    Friday <input type="number" name="hoursWorkedEachDay" value="4">
-    On this first Friday, they worked between the hours of: <input type="text" name="timeOfDay" value="8AM to 12PM">
-    Saturday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this first Saturday, they worked between the hours of: <input type="text" name="timeOfDay" value="N/A">
-    Sunday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this first Sunday, they worked between the hours of: <input type="text" name="timeOfDay" value="N/A">
-    Monday <input type="number" name="hoursWorkedEachDay" value="4">
-    On this second Monday, they worked between the hours of: <input type="text" name="timeOfDay" value="8AM to 12PM">
-    Tuesday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this second Tuesday, they worked between the hours of: <input type="text" name="timeOfDay"value="N/A">
-    Wednesday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this second Wednesday, they worked between the hours of: <input type="text" name="timeOfDay"value="N/A">
-    Thursday <input type="number" name="hoursWorkedEachDay" value="4">
-    On this second Thursday, they worked between the hours of: <input type="text" name="timeOfDay" value="8AM to 12PM">
-    Friday <input type="number" name="hoursWorkedEachDay" value="4">
-    On this second Friday, they worked between the hours of: <input type="text" name="timeOfDay" value="8AM to 12PM">
-    Saturday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this second Saturday, they worked between the hours of: <input type="text" name="timeOfDay" value="N/A">
-    Sunday <input type="number" name="hoursWorkedEachDay" value="0">
-    On this second Sunday, they worked between the hours of: <input type="text" name="timeOfDay" value="N/A">
+
+    <label for="selectNumber">Select Number of Days in this Pay Cycle:</label>
+    <select id="selectNumber" onchange="createTextboxes()">
+        <option disabled selected value> -- select an option -- </option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+    </select>
+
+    <div id="textboxContainer">
+        <!-- Textboxes will be dynamically added here -->
+    </div>
+
     Type hourly pay rate here ----> <input type="number" name="hourlyPayRate">
     Enter previous yearly gross income here ->>> <input type="text" name="yearlyPreviousGross">
-
+    Enter the federal tax here ->>> <input type="number" name="federalTax">
+    Enter the state tax here ->>> <input type="number" name="stateTax">
+    Enter previous deduction total here ->>>>> <input type="number" name="previousDeduction">
     <input type="submit" value="Create Stub">
 </form>
 
