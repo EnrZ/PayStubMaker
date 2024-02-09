@@ -12,12 +12,14 @@ public class Stub {
     private String payPeriod;
     private String payDay;
     private List<Integer> hoursWorkedEachDay = new ArrayList<>();
-    private Integer hourlyPayRate;
+    private int hourlyPayRate;
     private BigDecimal yearlyPreviousGross;
+
+    private List<String> timeOfDay = new ArrayList<>();
 
 
     //all arre required fields so a constructor with all will do
-    public Stub(String name,String employee, String checkNumber, String payPeriod, String payDate, List<Integer> hoursWorkedEachDay, Integer hourlyPayRate, BigDecimal yearlyPreviousGross) {
+    public Stub(String name,String employee, String checkNumber, String payPeriod, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<String> timeOfDay) {
         this.name = name;
         this.employee = employee;
         this.checkNumber = checkNumber;
@@ -76,11 +78,9 @@ public class Stub {
         this.hoursWorkedEachDay = hoursWorkedEachDay;
     }
 
-    public double getHourlyPayRate() {
-        return hourlyPayRate;
-    }
+    public int getHourlyPayRate() {return hourlyPayRate;}
 
-    public void setHourlyPayRate(Integer hourlyPayRate) {
+    public void setHourlyPayRate(int hourlyPayRate) {
         this.hourlyPayRate = hourlyPayRate;
     }
 
@@ -90,6 +90,14 @@ public class Stub {
 
     public void setYearlyPreviousGross(BigDecimal yearlyPreviousGross) {
         this.yearlyPreviousGross = yearlyPreviousGross;
+    }
+
+    public List<String> getTimeOfDay() {
+        return timeOfDay;
+    }
+
+    public void setTimeOfDay(List<String> timeOfDay) {
+        this.timeOfDay = timeOfDay;
     }
 
     @Override

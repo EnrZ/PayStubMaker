@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Pay Stub</title>
 
+    <link rel="stylesheet" th:href="@{/styles.css}">
+
 </head>
 <body>
 
@@ -49,13 +51,85 @@
 <table class="table">
     <thead>
     <tr>
+        <th></th>
         <th>Hours Worked Each Day</th>
+        <th>Working Hours</th>
     </tr>
     </thead>
     <tr th:each="stub : ${stubs}">
-        <td th:text="${stub.hoursWorkedEachDay}"></td>
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[0]}"></td>
+        <td th:text="${stub.timeOfDay[0]}"></td>
     </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[1]}"></td>
+        <td th:text="${stub.timeOfDay[1]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[2]}"></td>
+        <td th:text="${stub.timeOfDay[2]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[3]}"></td>
+        <td th:text="${stub.timeOfDay[3]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[4]}"></td>
+        <td th:text="${stub.timeOfDay[4]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[5]}"></td>
+        <td th:text="${stub.timeOfDay[5]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[6]}"></td>
+        <td th:text="${stub.timeOfDay[6]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[7]}"></td>
+        <td th:text="${stub.timeOfDay[7]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[8]}"></td>
+        <td th:text="${stub.timeOfDay[8]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[9]}"></td>
+        <td th:text="${stub.timeOfDay[9]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[10]}"></td>
+        <td th:text="${stub.timeOfDay[10]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[11]}"></td>
+        <td th:text="${stub.timeOfDay[11]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[12]}"></td>
+        <td th:text="${stub.timeOfDay[12]}"></td>
+    </tr>
+    <tr th:each="stub : ${stubs}">
+        <td> Monday </td>
+        <td th:text="${stub.hoursWorkedEachDay[13]}"></td>
+        <td th:text="${stub.timeOfDay[13]}"></td>
+    </tr>
+
 </table>
+
+
 
 <table class="table">
     <thead>
@@ -89,10 +163,12 @@
     <thead>
     <tr>
         <th>Social Security Contribution</th>
+        <th>Medicare Contribution</th>
     </tr>
     </thead>
     <tr>
         <td th:text="${socSecContribution}"></td>
+        <td th:text="${medicareContribution}"></td>
     </tr>
 </table>
 

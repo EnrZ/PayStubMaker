@@ -21,8 +21,8 @@ public class StubController {
         model.addAttribute("stubs" , stubs);
 
         int totalHours = 0, decimalPlaces = 2;
-        BigDecimal TGICalculations, YTDGICalculations, SOCSECCalculations;
-        BigDecimal totalGrossIncome, YTDGrossIncome, socSecContribution;
+        BigDecimal TGICalculations, YTDGICalculations, SOCSECCalculations, MCCalculations;
+        BigDecimal totalGrossIncome, YTDGrossIncome, socSecContribution,medicareContribution;
         BigDecimal hourlyPayRateConverted;
 
         for (int num: stubs.get(0).getHoursWorkedEachDay()){
@@ -41,8 +41,15 @@ public class StubController {
         YTDGrossIncome = YTDGICalculations.setScale(2, RoundingMode.HALF_UP);
         model.addAttribute("YTDGrossIncome", YTDGrossIncome);
 
-        socSecContribution = totalGrossIncome.multiply(BigDecimal.valueOf(0.062));
+
+        SOCSECCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.062));
+        socSecContribution = SOCSECCalculations.setScale(2, RoundingMode.UP);
         model.addAttribute("socSecContribution", socSecContribution);
+
+        MCCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.0145));
+        medicareContribution = MCCalculations.setScale(2, RoundingMode.UP);
+        model.addAttribute("medicareContribution", medicareContribution);
+
         return "stubs/index";
     }
 
