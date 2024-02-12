@@ -18,10 +18,16 @@
     Check Number <input type="text" name="checkNumber">
     Pay period Semimonthly
     Type in the specific pay period -> <input type="text" name="payPeriod">
+    On what day of the week did the pay period begin?  <select name = "payPeriodBeginning">
+    <option disabled selected value> -- select an option -- </option>
+    <option value="Monday">Monday</option>
+    <option value="Tuesday">Tuesday</option>
+    <option value="Wednesday">Wednesday</option>
+</select>
     Type in the pay date -> <input type="text" name="payDay">
 
     <label for="selectNumber">Select Number of Days in this Pay Cycle:</label>
-    <select id="selectNumber" onchange="createTextboxes()">
+    <select id="selectNumber" name="daysLong" onchange="createTextboxes()">
         <option disabled selected value> -- select an option -- </option>
         <option value="14">14</option>
         <option value="15">15</option>

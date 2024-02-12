@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.math.BigDecimal;
 
@@ -27,6 +29,10 @@ public class StubController {
         BigDecimal federalTax, stateTax;
         BigDecimal taxCalculations, contributionCalculations, deductionCalculations,currentTotalDeduction;
         BigDecimal YTDDeduction, YTDDeductionCalculations, netPay, netPayCalculations;
+
+        List<String> daysOfWeek = new ArrayList<>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
+        String beginningDay;
+        int daysLong;
 
         for (int num: stubs.get(0).getHoursWorkedEachDay()){
             totalHours +=num;
@@ -66,6 +72,21 @@ public class StubController {
         netPayCalculations = totalGrossIncome.subtract(currentTotalDeduction);
         netPay = netPayCalculations.setScale(2, RoundingMode.UP);
         model.addAttribute("netPay", netPay);
+
+        beginningDay = stubs.get(0).getPayPeriodBeginning();
+        if(daysOfWeek.contains(beginningDay)) {
+            int index = daysOfWeek.indexOf(beginningDay);
+            List<String> updatedDays = daysOfWeek.subList(index, daysOfWeek.size());
+            model.addAttribute("updatedDays", updatedDays);
+        }
+
+        List<Integer> hoursWorked = new ArrayList<>(stubs.get(0).getHoursWorkedEachDay());
+        List<String> timeWorked = new ArrayList(stubs.get(0).getTimeOfDay());
+        model.addAttribute("hoursWorked", hoursWorked);
+        model.addAttribute("timeWorked", timeWorked);
+
+        daysLong = stubs.get(0).getDaysLong() - 1;
+        model.addAttribute("daysLong", daysLong);
 
         return "stubs/index";
     }

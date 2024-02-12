@@ -10,6 +10,7 @@ public class Stub {
     private String employee;
     private String checkNumber;
     private String payPeriod;
+    private String payPeriodBeginning;
     private String payDay;
     private List<Integer> hoursWorkedEachDay = new ArrayList<>();
     private int hourlyPayRate;
@@ -22,11 +23,12 @@ public class Stub {
     private BigDecimal stateTax;
 
     private BigDecimal previousDeduction;
+    private int daysLong;
 
 
 
     //all arre required fields so a constructor with all will do
-    public Stub(String name,String employee, String checkNumber, String payPeriod, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<String> timeOfDay, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions) {
+    public Stub(String name,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<String> timeOfDay, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions, int daysLong) {
         this.name = name;
         this.employee = employee;
         this.checkNumber = checkNumber;
@@ -35,6 +37,8 @@ public class Stub {
         this.hourlyPayRate = hourlyPayRate;
         this.yearlyPreviousGross = yearlyPreviousGross;
         this.previousDeduction = previousDeduction;
+        this.payPeriodBeginning = payPeriodBeginning;
+        this.daysLong = daysLong;
     }
 
 
@@ -64,6 +68,14 @@ public class Stub {
 
     public String getPayPeriod() {
         return payPeriod;
+    }
+
+    public String getPayPeriodBeginning() {
+        return payPeriodBeginning;
+    }
+
+    public void setPayPeriodBeginning(String payPeriodBeginning) {
+        this.payPeriodBeginning = payPeriodBeginning;
     }
 
     public void setPayPeriod(String payPeriod) {
@@ -130,6 +142,14 @@ public class Stub {
 
     public void setPreviousDeduction(BigDecimal previousDeduction) {
         this.previousDeduction = previousDeduction;
+    }
+
+    public int getDaysLong() {
+        return daysLong;
+    }
+
+    public void setDaysLong(int daysLong) {
+        this.daysLong = daysLong;
     }
 
     @Override
