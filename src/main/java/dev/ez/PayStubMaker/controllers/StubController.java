@@ -88,6 +88,9 @@ public class StubController {
         daysLong = stubs.get(0).getDaysLong() - 1;
         model.addAttribute("daysLong", daysLong);
 
+        String companyName = stubs.get(0).getName() + " Pay Stub";
+        model.addAttribute("companyName", companyName);
+
         return "stubs/index";
     }
 

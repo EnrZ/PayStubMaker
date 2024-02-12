@@ -9,18 +9,16 @@
 </head>
 <body>
 
-<h1> Stubs </h1>
+<h3 th:text="${companyName}"></h3>
 
 <table class="table">
     <thead>
     <tr>
-        <th>Company Name</th>
         <th>Employee Name</th>
         <th>Check Number</th>
     </tr>
     </thead>
     <tr th:each="stub : ${stubs}">
-        <td th:text="${stub.name}"></td>
         <td th:text="${stub.employee}"></td>
         <td th:text="${stub.checkNumber}"></td>
     </tr>

@@ -5,10 +5,15 @@ $(document).ready(function() {
                 container.empty(); // Clear existing textboxes
 
                 for (let i = 0; i < numTextboxes; i++) {
+
+                const label = $("<label>").text("Day " + (i + 1));
+                            container.append(label);
+
                     const textbox1 = $("<input>").attr({
                         type: "number",
                         name: "hoursWorkedEachDay",
                          value: "2"
+
                     });
                     container.append(textbox1);
                     const textbox2 = $("<input>").attr({
@@ -17,6 +22,8 @@ $(document).ready(function() {
                           value: "N/A"
                     });
                    container.append(textbox2);
+
+                   container.append("<br>");
                 }
             });
         });
