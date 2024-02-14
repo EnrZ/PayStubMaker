@@ -51,14 +51,15 @@
     <tr>
         <th></th>
         <th>Hours Worked Each Day</th>
-        <th>Working Hours</th>
+        <th>Work Start Time</th>
+        <th>Work End Time</th>
     </tr>
     </thead>
     <tr th:each="daysLong : ${#numbers.sequence(0, daysLong)}">
         <td th:text="${updatedDays[daysLong]}"> </td>
         <td th:text="${hoursWorked[daysLong]}"></td>
-        <td th:text="${timeWorked[daysLong]}"></td>
-
+        <td th:text="${timeWorkedStart[daysLong]}"></td>
+        <td th:text="${timeWorkedEnd[daysLong]}"></td>
 </table>
 
 

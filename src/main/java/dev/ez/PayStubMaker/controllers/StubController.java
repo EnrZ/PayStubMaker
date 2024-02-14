@@ -81,9 +81,11 @@ public class StubController {
         }
 
         List<Integer> hoursWorked = new ArrayList<>(stubs.get(0).getHoursWorkedEachDay());
-        List<String> timeWorked = new ArrayList(stubs.get(0).getTimeOfDay());
+        List<String> timeWorkedStart = new ArrayList(stubs.get(0).getStartTime());
+        List<String> timeWorkedEnd = new ArrayList(stubs.get(0).getEndTime());
         model.addAttribute("hoursWorked", hoursWorked);
-        model.addAttribute("timeWorked", timeWorked);
+        model.addAttribute("timeWorkedStart", timeWorkedStart);
+        model.addAttribute("timeWorkedEnd", timeWorkedEnd);
 
         daysLong = stubs.get(0).getDaysLong() - 1;
         model.addAttribute("daysLong", daysLong);
