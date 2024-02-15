@@ -16,32 +16,14 @@
     <tr>
         <th>Employee Name</th>
         <th>Check Number</th>
+        <th>Pay Period</th>
+        <th>Pay Day</th>
     </tr>
     </thead>
     <tr th:each="stub : ${stubs}">
         <td th:text="${stub.employee}"></td>
         <td th:text="${stub.checkNumber}"></td>
-    </tr>
-</table>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>Pay Period</th>
-    </tr>
-    </thead>
-    <tr th:each="stub : ${stubs}">
         <td th:text="${stub.payPeriod}"></td>
-    </tr>
-</table>
-
-<table class="table">
-    <thead>
-    <tr>
-        <th>Pay Day</th>
-    </tr>
-    </thead>
-    <tr th:each="stub : ${stubs}">
         <td th:text="${stub.payDay}"></td>
     </tr>
 </table>
@@ -57,7 +39,7 @@
     </thead>
     <tr th:each="daysLong : ${#numbers.sequence(0, daysLong)}">
         <td th:text="${updatedDays[daysLong]}"> </td>
-        <td th:text="${hoursWorked[daysLong]}"></td>
+        <td th:if="${hoursWorked[daysLong] != 0}" th:text="${hoursWorked[daysLong]}"></td>
         <td th:text="${timeWorkedStart[daysLong]}"></td>
         <td th:text="${timeWorkedEnd[daysLong]}"></td>
 </table>
@@ -99,8 +81,6 @@
         <th>Medicare Contribution</th>
         <th>Federal Tax</th>
         <th>State Tax</th>
-        <th>Current Total Deduction</th>
-        <th>Year-to-Date Deduction</th>
     </tr>
     </thead>
     <tr th:each="stub : ${stubs}">
@@ -108,18 +88,20 @@
         <td th:text="${medicareContribution}"></td>
         <td th:text="${stub.federalTax}"></td>
         <td th:text="${stub.stateTax}"></td>
-        <td th:text="${currentTotalDeduction}"></td>
-        <td th:text="${YTDDeduction}"></td>
     </tr>
 </table>
 
 <table class="table">
     <thead>
     <tr>
+        <th>Current Total Deduction</th>
+        <th>Year-to-Date Deduction</th>
         <th>Net Pay</th>
     </tr>
     </thead>
     <tr>
+        <td th:text="${currentTotalDeduction}"></td>
+        <td th:text="${YTDDeduction}"></td>
         <td th:text="${netPay}"></td>
     </tr>
 </table>

@@ -14,10 +14,13 @@
 
 <form method="POST" action="/stubs/create">
     Company name <input type="text" name="name" value="Saint Louis Angelic Caregivers">
+    <div style="clear:both"></div>
     Employee Name <input type="text" name="employee">
+    <div style="clear:both"></div>
     Check Number <input type="text" name="checkNumber">
-    Pay period Semimonthly
-    Type in the specific pay period -> <input type="text" name="payPeriod">
+    <div style="clear:both"></div>
+    Type in the specific pay period -> <input type="text" name="payPeriod" value="Semi-monthly">
+    <div style="clear:both"></div>
     On what day of the week did the pay period begin?  <select name = "payPeriodBeginning">
     <option disabled selected value> -- select an option -- </option>
     <option value="Monday">Monday</option>
@@ -28,8 +31,10 @@
     <option value="Saturday">Saturday</option>
     <option value="Sunday">Sunday</option>
 </select>
+    <div style="clear:both"></div>
     Type in the pay date -> <input type="text" name="payDay">
 
+    <div style="clear:both"></div>
     <label for="selectNumber">Select Number of Days in this Pay Cycle:</label>
     <select id="selectNumber" name="daysLong" onchange="createTextboxes()">
         <option disabled selected value> -- select an option -- </option>
@@ -41,12 +46,17 @@
     <div id="textboxContainer">
         <!-- Textboxes will be dynamically added here -->
     </div>
-
+    <div style="clear:both"></div>
     Type hourly pay rate here ----> <input type="number" name="hourlyPayRate">
+    <div style="clear:both"></div>
     Enter previous yearly gross income here ->>> <input type="text" name="yearlyPreviousGross">
+    <div style="clear:both"></div>
     Enter the federal tax here ->>> <input type="number" name="federalTax">
+    <div style="clear:both"></div>
     Enter the state tax here ->>> <input type="number" name="stateTax">
+    <div style="clear:both"></div>
     Enter previous deduction total here ->>>>> <input type="number" name="previousDeduction">
+    <div style="clear:both"></div>
     <input type="submit" value="Create Stub">
 </form>
 

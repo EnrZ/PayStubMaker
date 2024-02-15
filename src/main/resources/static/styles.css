@@ -1,7 +1,10 @@
 body {
 font-size: 20px;
-color: teal;
 }
 .error{
 color: red;
+}
+
+th, td {
+  padding-right: 8px;
 }
