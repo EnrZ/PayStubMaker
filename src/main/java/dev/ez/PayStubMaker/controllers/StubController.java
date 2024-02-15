@@ -126,7 +126,7 @@ public class StubController {
         if (hour > 0 && hour < 12) {
             return hour + " AM";
         } else if(hour == 0){
-            return "0";
+            return " ";
         }
         else if (hour == 12) {
             return "12 PM";

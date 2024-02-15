@@ -39,7 +39,7 @@
     </thead>
     <tr th:each="daysLong : ${#numbers.sequence(0, daysLong)}">
         <td th:text="${updatedDays[daysLong]}"> </td>
-        <td th:if="${hoursWorked[daysLong]}" th:text="${hoursWorked[daysLong]}"></td>
+        <td th:if="${hoursWorked[daysLong] != 0}" th:text="${hoursWorked[daysLong]}"></td>
         <td th:if="${timeWorkedStart[daysLong] != 0}" th:text="${timeWorkedStartFormatted[daysLong]}"></td>
         <td th:text="${timeWorkedEnd[daysLong]}"></td>
 </table>
