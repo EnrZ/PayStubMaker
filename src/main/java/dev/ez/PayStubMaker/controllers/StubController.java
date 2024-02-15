@@ -81,10 +81,24 @@ public class StubController {
         }
 
         List<Integer> hoursWorked = new ArrayList<>(stubs.get(0).getHoursWorkedEachDay());
-        List<String> timeWorkedStart = new ArrayList(stubs.get(0).getStartTime());
-        List<String> timeWorkedEnd = new ArrayList(stubs.get(0).getEndTime());
+        List<Integer> timeWorkedStart = new ArrayList(stubs.get(0).getStartTime());
+        List<String> timeWorkedEnd = new ArrayList<>();
+
+        for (int i = 0; i < hoursWorked.size(); i++) {
+                int endingHour = timeWorkedStart.get(i) + hoursWorked.get(i);
+                String formattedTime = formatTime(endingHour);
+                timeWorkedEnd.add(formattedTime);
+        }
+
+        List<String> timeWorkedStartFormatted = new ArrayList<>();
+        for (Integer integer : timeWorkedStart) {
+            String formattedTime = formatTime(integer);
+            timeWorkedStartFormatted.add(formattedTime);
+        }
+
         model.addAttribute("hoursWorked", hoursWorked);
         model.addAttribute("timeWorkedStart", timeWorkedStart);
+        model.addAttribute("timeWorkedStartFormatted", timeWorkedStartFormatted);
         model.addAttribute("timeWorkedEnd", timeWorkedEnd);
 
         daysLong = stubs.get(0).getDaysLong() - 1;
@@ -108,5 +122,18 @@ public class StubController {
         stubs.add(newStub);
         return "redirect:/stubs";
     }
+    private static String formatTime(int hour) {
+        if (hour > 0 && hour < 12) {
+            return hour + " AM";
+        } else if(hour == 0){
+            return "0";
+        }
+        else if (hour == 12) {
+            return "12 PM";
+        } else {
+            return (hour - 12) + " PM";
+        }
+    }
+
 }
 

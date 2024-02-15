@@ -16,8 +16,8 @@ public class Stub {
     private int hourlyPayRate;
     private BigDecimal yearlyPreviousGross;
 
-    private List<String> startTime = new ArrayList<>();
-    private List<String> endTime = new ArrayList<>();
+    private List<Integer> startTime = new ArrayList<>();
+
 
     //fed and state tax will be manual for now
     private BigDecimal federalTax;
@@ -29,7 +29,7 @@ public class Stub {
 
 
     //all arre required fields so a constructor with all will do
-    public Stub(String name,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<String> startTime, List<String> endTime, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions, int daysLong) {
+    public Stub(String name,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions, int daysLong) {
         this.name = name;
         this.employee = employee;
         this.checkNumber = checkNumber;
@@ -41,7 +41,6 @@ public class Stub {
         this.payPeriodBeginning = payPeriodBeginning;
         this.daysLong = daysLong;
         this.startTime = startTime;
-        this.endTime = endTime;
     }
 
 
@@ -147,21 +146,14 @@ public class Stub {
         this.daysLong = daysLong;
     }
 
-    public List<String> getStartTime() {
+    public List<Integer> getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(List<String> startTime) {
+    public void setStartTime(List<Integer> startTime) {
         this.startTime = startTime;
     }
 
-    public List<String> getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(List<String> endTime) {
-        this.endTime = endTime;
-    }
 
     @Override
     public String toString() {

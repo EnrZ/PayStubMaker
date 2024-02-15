@@ -40,24 +40,18 @@ $(document).ready(function() {
                     const select2 = $("<select>").attr({
                         name: "startTime"
                     });
-                    select2.append($("<option>").val("").text("Select starting time"));
-                    select2.append($("<option>").val("7AM").text("7AM"));
-                    select2.append($("<option>").val("7AM").text("7AM"));
-                    select2.append($("<option>").val("7AM").text("7AM"));
-                    select2.append($("<option>").val("7AM").text("7AM"));
-                    select2.append($("<option>").val("7AM").text("7AM"));
-                    select2.append($("<option>").val("Noon").text("Noon"));
+                    select2.append($("<option>").val(0).text("Select starting time"));
+                    select2.append($("<option>").val(7).text("7AM"));
+                    select2.append($("<option>").val(8).text("8AM"));
+                    select2.append($("<option>").val(9).text("9AM"));
+                    select2.append($("<option>").val(10).text("10AM"));
+                    select2.append($("<option>").val(1).text("11AM"));
+                    select2.append($("<option>").val(12).text("Noon"));
 
-                    const select3 = $("<select>").attr({
-                        name: "endTime",
-                    });
 
-                    select3.append($("<option>").val("").text("Please ending time"));
-                    select3.append($("<option>").val("4PM").text("4PM"));
-                    select3.append($("<option>").val("5PM").text("5PM"));
 
                    container.append(select2);
-                   container.append(select3);
+
                    container.append("<br>");
                 }
             });
