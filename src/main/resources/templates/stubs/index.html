@@ -10,8 +10,12 @@
 <body>
 
 <h3 th:text="${companyName}"></h3>
+<h5 th:text="${companyAddress}"></h5>
+<h5 th:text="${companyEmail}"></h5>
 
-<table class="table">
+
+
+<table name ="basicWorkInfo" class="table">
     <thead>
     <tr>
         <th>Employee Name</th>
@@ -97,12 +101,14 @@
         <th>Current Total Deduction</th>
         <th>Year-to-Date Deduction</th>
         <th>Net Pay</th>
+        <th>Year-to-Date Net Pay</th>
     </tr>
     </thead>
     <tr>
         <td th:text="${currentTotalDeduction}"></td>
         <td th:text="${YTDDeduction}"></td>
         <td th:text="${netPay}"></td>
+        <td th:text="${YTDnetPay}"></td>
     </tr>
 </table>
 

@@ -45,8 +45,16 @@ $(document).ready(function() {
                     select2.append($("<option>").val(8).text("8AM"));
                     select2.append($("<option>").val(9).text("9AM"));
                     select2.append($("<option>").val(10).text("10AM"));
-                    select2.append($("<option>").val(1).text("11AM"));
+                    select2.append($("<option>").val(11).text("11AM"));
                     select2.append($("<option>").val(12).text("Noon"));
+                    select2.append($("<option>").val(13).text("1PM"));
+                    select2.append($("<option>").val(14).text("2PM"));
+                    select2.append($("<option>").val(15).text("3PM"));
+                    select2.append($("<option>").val(16).text("4PM"));
+                    select2.append($("<option>").val(17).text("5PM"));
+                    select2.append($("<option>").val(18).text("6PM"));
+                    select2.append($("<option>").val(19).text("7PM"));
+
 
 
 

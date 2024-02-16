@@ -7,6 +7,8 @@ import java.util.List;
 public class Stub {
 
     private String name;
+    private String companyAddress;
+    private String companyEmail;
     private String employee;
     private String checkNumber;
     private String payPeriod;
@@ -26,11 +28,15 @@ public class Stub {
     private BigDecimal previousDeduction;
     private int daysLong;
 
+    private BigDecimal previousNetPay;
+
 
 
     //all arre required fields so a constructor with all will do
-    public Stub(String name,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions, int daysLong) {
+    public Stub(String name,String companyAddress, String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
         this.name = name;
+        this.companyAddress = companyAddress;
+        this.companyEmail = companyEmail;
         this.employee = employee;
         this.checkNumber = checkNumber;
         this.payPeriod = payPeriod;
@@ -41,6 +47,7 @@ public class Stub {
         this.payPeriodBeginning = payPeriodBeginning;
         this.daysLong = daysLong;
         this.startTime = startTime;
+        this.previousNetPay = previousNetPay;
     }
 
 
@@ -50,6 +57,20 @@ public class Stub {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCompanyAddress() { return companyAddress; }
+
+    public void setCompanyAddress(String companyAddress) {
+        this.companyAddress = companyAddress;
+    }
+
+    public String getCompanyEmail() {
+        return companyEmail;
+    }
+
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail = companyEmail;
     }
 
     public String getEmployee() {
@@ -154,6 +175,13 @@ public class Stub {
         this.startTime = startTime;
     }
 
+    public BigDecimal getPreviousNetPay() {
+        return previousNetPay;
+    }
+
+    public void setPreviousNetPay(BigDecimal previousNetPay) {
+        this.previousNetPay = previousNetPay;
+    }
 
     @Override
     public String toString() {

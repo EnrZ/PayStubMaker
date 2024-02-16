@@ -28,7 +28,7 @@ public class StubController {
         BigDecimal hourlyPayRateConverted;
         BigDecimal federalTax, stateTax;
         BigDecimal taxCalculations, contributionCalculations, deductionCalculations,currentTotalDeduction;
-        BigDecimal YTDDeduction, YTDDeductionCalculations, netPay, netPayCalculations;
+        BigDecimal YTDDeduction, YTDDeductionCalculations, netPay, netPayCalculations, YTDnetPay,YTDnetPayCalculations;
 
         List<String> daysOfWeek = new ArrayList<>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
         String beginningDay;
@@ -73,6 +73,10 @@ public class StubController {
         netPay = netPayCalculations.setScale(2, RoundingMode.UP);
         model.addAttribute("netPay", netPay);
 
+        YTDnetPayCalculations = netPay.add(stubs.get(0).getPreviousNetPay());
+        YTDnetPay = YTDnetPayCalculations.setScale(2, RoundingMode.UP);
+        model.addAttribute("YTDnetPay", YTDnetPay);
+
         beginningDay = stubs.get(0).getPayPeriodBeginning();
         if(daysOfWeek.contains(beginningDay)) {
             int index = daysOfWeek.indexOf(beginningDay);
@@ -106,6 +110,10 @@ public class StubController {
 
         String companyName = stubs.get(0).getName() + " Pay Stub";
         model.addAttribute("companyName", companyName);
+        String companyAddress = stubs.get(0).getCompanyAddress();
+        model.addAttribute("companyAddress", companyAddress);
+        String companyEmail = stubs.get(0).getCompanyEmail();
+        model.addAttribute("companyEmail", companyEmail);
 
         return "stubs/index";
     }
@@ -123,12 +131,12 @@ public class StubController {
         return "redirect:/stubs";
     }
     private static String formatTime(int hour) {
+        hour = hour % 24;
         if (hour > 0 && hour < 12) {
             return hour + " AM";
-        } else if(hour == 0){
+        } else if (hour == 0) {
             return " ";
-        }
-        else if (hour == 12) {
+        } else if (hour == 12) {
             return "12 PM";
         } else {
             return (hour - 12) + " PM";
