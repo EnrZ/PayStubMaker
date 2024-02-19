@@ -26,15 +26,15 @@
     Type in the specific pay period -> <input type="text" name="payPeriod" value="Semi-monthly">
     <div style="clear:both"></div>
     On what day of the week did the pay period begin?  <select name = "payPeriodBeginning">
-    <option disabled selected value> -- select an option -- </option>
-    <option value="Monday">Monday</option>
-    <option value="Tuesday">Tuesday</option>
-    <option value="Wednesday">Wednesday</option>
-    <option value="Thursday">Thursday</option>
-    <option value="Friday">Friday</option>
-    <option value="Saturday">Saturday</option>
-    <option value="Sunday">Sunday</option>
-</select>
+        <option disabled selected value> -- select an option -- </option>
+        <option value="Monday">Monday</option>
+        <option value="Tuesday">Tuesday</option>
+        <option value="Wednesday">Wednesday</option>
+        <option value="Thursday">Thursday</option>
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Sunday">Sunday</option>
+    </select>
     <div style="clear:both"></div>
     Type in the pay date -> <input type="text" name="payDay">
 
@@ -57,7 +57,14 @@
     <div style="clear:both"></div>
     Enter the federal tax here ->>> <input type="number" name="federalTax">
     <div style="clear:both"></div>
-    Enter the state tax here ->>> <input type="number" name="stateTax">
+    Enter the employee filing status here ->>> <select name="stateTaxFiling">
+        <option disabled selected value> -- select an option -- </option>
+        <option value="0">Single</option>
+        <option value="0">Married Filing Combined - Spouse Works</option>
+        <option value="0">Married Filing Separate</option>
+        <option value="1">Head of Household</option>
+        <option value="2">Married Filing Combined - Spouse Doesn't Work</option>
+    </select>
     <div style="clear:both"></div>
     Enter previous deduction total here ->>>>> <input type="number" name="previousDeduction">
     <div style="clear:both"></div>

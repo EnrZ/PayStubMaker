@@ -23,7 +23,7 @@ public class Stub {
 
     //fed and state tax will be manual for now
     private BigDecimal federalTax;
-    private BigDecimal stateTax;
+    private int stateTaxFiling;
 
     private BigDecimal previousDeduction;
     private int daysLong;
@@ -33,7 +33,7 @@ public class Stub {
 
 
     //all arre required fields so a constructor with all will do
-    public Stub(String name,String companyAddress, String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, BigDecimal stateTax, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
+    public Stub(String name,String companyAddress, String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
         this.name = name;
         this.companyAddress = companyAddress;
         this.companyEmail = companyEmail;
@@ -48,6 +48,8 @@ public class Stub {
         this.daysLong = daysLong;
         this.startTime = startTime;
         this.previousNetPay = previousNetPay;
+        this.stateTaxFiling = stateTaxFiling;
+
     }
 
 
@@ -143,12 +145,12 @@ public class Stub {
         this.federalTax = federalTax;
     }
 
-    public BigDecimal getStateTax() {
-        return stateTax;
+    public int getStateTaxFiling() {
+        return stateTaxFiling;
     }
 
-    public void setStateTax(BigDecimal stateTax) {
-        this.stateTax = stateTax;
+    public void setStateTaxFiling(int stateTaxFiling) {
+        this.stateTaxFiling = stateTaxFiling;
     }
 
     public BigDecimal getPreviousDeduction() {
