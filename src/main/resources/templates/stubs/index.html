@@ -9,9 +9,12 @@
 </head>
 <body>
 
-<h3 th:text="${companyName}"></h3>
-<h5 th:text="${companyAddress}"></h5>
-<h5 th:text="${companyEmail}"></h5>
+<th block th:each="stub : ${stubs}">
+    <h3>
+        <span th:text="${stub.name}"></span> Pay Stub
+    </h3>
+<h5 th:text="${stub.companyAddress}"></h5>
+<h5 th:text="${stub.companyEmail}"></h5>
 
 
 
@@ -24,7 +27,7 @@
         <th>Pay Day</th>
     </tr>
     </thead>
-    <tr th:each="stub : ${stubs}">
+    <tr>
         <td th:text="${stub.employee}"></td>
         <td th:text="${stub.checkNumber}"></td>
         <td th:text="${stub.payPeriod}"></td>
@@ -41,11 +44,11 @@
         <th>Work End Time</th>
     </tr>
     </thead>
-    <tr th:each="daysLong : ${#numbers.sequence(0, daysLong)}">
-        <td th:text="${updatedDays[daysLong]}"> </td>
-        <td th:if="${hoursWorked[daysLong] != 0}" th:text="${hoursWorked[daysLong]}"></td>
-        <td th:if="${timeWorkedStart[daysLong] != 0}" th:text="${timeWorkedStartFormatted[daysLong]}"></td>
-        <td th:text="${timeWorkedEnd[daysLong]}"></td>
+    <tr th:each="daysLong : ${#numbers.sequence(0, stub.daysLong)}">
+        <td th:text="${stub.updatedDays[daysLong]}"> </td>
+        <td th:if="${stub.hoursWorkedEachDay[daysLong] != 0}" th:text="${stub.hoursWorkedEachDay[daysLong]}"></td>
+        <td th:if="${stub.getStartTime[daysLong] != 0}" th:text="${stub.timeWorkedStartFormatted[daysLong]}"></td>
+        <td th:text="${stub.timeWorkedEnd[daysLong]}"></td>
 </table>
 
 
@@ -58,10 +61,10 @@
         <th>Total Gross Income</th>
     </tr>
     </thead>
-    <tr th:each="stub : ${stubs}">
-        <td th:text="${totalHours}"></td>
+    <tr>
+        <td th:text="${stub.totalHours}"></td>
         <td th:text="${stub.hourlyPayRate}"></td>
-        <td th:text="${totalGrossIncome}"></td>
+        <td th:text="${stub.totalGrossIncome}"></td>
     </tr>
 </table>
 
@@ -72,9 +75,9 @@
         <th>Year-to-Date Gross Income</th>
     </tr>
     </thead>
-    <tr th:each="stub : ${stubs}">
+    <tr>
         <td th:text="${stub.yearlyPreviousGross}"></td>
-        <td th:text="${YTDGrossIncome}"></td>
+        <td th:text="${stub.YTDGrossIncome}"></td>
     </tr>
 </table>
 
@@ -87,11 +90,11 @@
         <th>State Tax</th>
     </tr>
     </thead>
-    <tr th:each="stub : ${stubs}">
+    <tr>
         <td th:text="${socSecContribution}"></td>
         <td th:text="${medicareContribution}"></td>
         <td th:text="${stub.federalTax}"></td>
-        <td th:text="${stateTax}"></td>
+        <td th:text="${stub.stateTax}"></td>
     </tr>
 </table>
 
@@ -111,6 +114,8 @@
         <td th:text="${YTDnetPay}"></td>
     </tr>
 </table>
+
+</th>
 
 </body>
 </html>

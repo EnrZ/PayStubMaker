@@ -20,6 +20,9 @@ public class StubController {
 
     @GetMapping
     public String displayAllStubs(Model model) {
+
+        //Goes through each stub
+        for (Stub stub : stubs) {
         model.addAttribute("stubs", stubs);
 
         int totalHours = 0, decimalPlaces = 2;
@@ -34,92 +37,88 @@ public class StubController {
         String beginningDay;
         int daysLong;
 
-        for (int num : stubs.get(0).getHoursWorkedEachDay()) {
-            totalHours += num;
+
+            for (int num : stub.getHoursWorkedEachDay()) {
+                totalHours += num;
+            }
+
+
+       stub.setTotalHours(totalHours);
+
+
+            hourlyPayRateConverted = BigDecimal.valueOf(stub.getHourlyPayRate());
+
+            TGICalculations = hourlyPayRateConverted.multiply(BigDecimal.valueOf(totalHours));
+            totalGrossIncome = TGICalculations.setScale(2, RoundingMode.HALF_UP);
+
+            stub.setTotalGrossIncome(totalGrossIncome);
+
+            YTDGICalculations = totalGrossIncome.add(stub.getYearlyPreviousGross());
+            YTDGrossIncome = YTDGICalculations.setScale(2, RoundingMode.HALF_UP);
+            stub.setYTDGrossIncome(YTDGrossIncome);
+
+
+            SOCSECCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.062));
+            socSecContribution = SOCSECCalculations.setScale(2, RoundingMode.UP);
+            model.addAttribute("socSecContribution", socSecContribution);
+
+            MCCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.0145));
+            medicareContribution = MCCalculations.setScale(2, RoundingMode.UP);
+            model.addAttribute("medicareContribution", medicareContribution);
+
+            //Calling this method to calculate state tax
+            stateTax = stateTaxFormula(stub.getStateTaxFiling(), totalGrossIncome);
+            stub.setStateTax(stateTax);
+
+
+            taxCalculations = stub.getFederalTax().add(stateTax);
+            contributionCalculations = medicareContribution.add(socSecContribution);
+            deductionCalculations = taxCalculations.add(contributionCalculations);
+            currentTotalDeduction = deductionCalculations.setScale(2, RoundingMode.UP);
+            model.addAttribute("currentTotalDeduction", currentTotalDeduction);
+
+            YTDDeductionCalculations = currentTotalDeduction.add(stub.getPreviousDeduction());
+            YTDDeduction = YTDDeductionCalculations.setScale(2, RoundingMode.UP);
+            model.addAttribute("YTDDeduction", YTDDeduction);
+
+            netPayCalculations = totalGrossIncome.subtract(currentTotalDeduction);
+            netPay = netPayCalculations.setScale(2, RoundingMode.UP);
+            model.addAttribute("netPay", netPay);
+
+            YTDnetPayCalculations = netPay.add(stub.getPreviousNetPay());
+            YTDnetPay = YTDnetPayCalculations.setScale(2, RoundingMode.UP);
+            model.addAttribute("YTDnetPay", YTDnetPay);
+
+            beginningDay = stub.getPayPeriodBeginning();
+            if (daysOfWeek.contains(beginningDay)) {
+                int index = daysOfWeek.indexOf(beginningDay);
+                List<String> updatedDays = daysOfWeek.subList(index, daysOfWeek.size());
+                stub.setUpdatedDays(updatedDays);
+            }
+
+            List<Integer> hoursWorked = new ArrayList<>(stub.getHoursWorkedEachDay());
+            List<Integer> timeWorkedStart = new ArrayList<>(stub.getStartTime());
+            List<String> timeWorkedEnd = new ArrayList<>();
+
+            for (int i = 0; i < hoursWorked.size(); i++) {
+                int endingHour = timeWorkedStart.get(i) + hoursWorked.get(i);
+                String formattedTime = formatTime(endingHour);
+                timeWorkedEnd.add(formattedTime);
+            }
+
+            List<String> timeWorkedStartFormatted = new ArrayList<>();
+            for (Integer integer : timeWorkedStart) {
+                String formattedTime = formatTime(integer);
+                timeWorkedStartFormatted.add(formattedTime);
+            }
+
+            stub.setHoursWorkedEachDay(hoursWorked);
+            stub.setTimeWorkedStartFormatted(timeWorkedStartFormatted);
+            stub.setTimeWorkedEnd(timeWorkedEnd);
+
+            daysLong = stub.getDaysLong() - 1;
+            stub.setDaysLong(daysLong);
         }
-
-        model.addAttribute("totalHours", totalHours);
-
-        hourlyPayRateConverted = BigDecimal.valueOf(stubs.get(0).getHourlyPayRate());
-
-        TGICalculations = hourlyPayRateConverted.multiply(BigDecimal.valueOf(totalHours));
-        totalGrossIncome = TGICalculations.setScale(2, RoundingMode.HALF_UP);
-        model.addAttribute("totalGrossIncome", totalGrossIncome);
-
-        YTDGICalculations = totalGrossIncome.add(stubs.get(0).getYearlyPreviousGross());
-        YTDGrossIncome = YTDGICalculations.setScale(2, RoundingMode.HALF_UP);
-        model.addAttribute("YTDGrossIncome", YTDGrossIncome);
-
-
-        SOCSECCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.062));
-        socSecContribution = SOCSECCalculations.setScale(2, RoundingMode.UP);
-        model.addAttribute("socSecContribution", socSecContribution);
-
-        MCCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.0145));
-        medicareContribution = MCCalculations.setScale(2, RoundingMode.UP);
-        model.addAttribute("medicareContribution", medicareContribution);
-
-        //Calling this method to calculate state tax
-        stateTax = stateTaxFormula(stubs.get(0).getStateTaxFiling(), totalGrossIncome);
-        model.addAttribute("stateTax", stateTax);
-
-
-        taxCalculations = stubs.get(0).getFederalTax().add(stateTax);
-        contributionCalculations = medicareContribution.add(socSecContribution);
-        deductionCalculations = taxCalculations.add(contributionCalculations);
-        currentTotalDeduction = deductionCalculations.setScale(2, RoundingMode.UP);
-        model.addAttribute("currentTotalDeduction", currentTotalDeduction);
-
-        YTDDeductionCalculations = currentTotalDeduction.add(stubs.get(0).getPreviousDeduction());
-        YTDDeduction = YTDDeductionCalculations.setScale(2, RoundingMode.UP);
-        model.addAttribute("YTDDeduction", YTDDeduction);
-
-        netPayCalculations = totalGrossIncome.subtract(currentTotalDeduction);
-        netPay = netPayCalculations.setScale(2, RoundingMode.UP);
-        model.addAttribute("netPay", netPay);
-
-        YTDnetPayCalculations = netPay.add(stubs.get(0).getPreviousNetPay());
-        YTDnetPay = YTDnetPayCalculations.setScale(2, RoundingMode.UP);
-        model.addAttribute("YTDnetPay", YTDnetPay);
-
-        beginningDay = stubs.get(0).getPayPeriodBeginning();
-        if (daysOfWeek.contains(beginningDay)) {
-            int index = daysOfWeek.indexOf(beginningDay);
-            List<String> updatedDays = daysOfWeek.subList(index, daysOfWeek.size());
-            model.addAttribute("updatedDays", updatedDays);
-        }
-
-        List<Integer> hoursWorked = new ArrayList<>(stubs.get(0).getHoursWorkedEachDay());
-        List<Integer> timeWorkedStart = new ArrayList(stubs.get(0).getStartTime());
-        List<String> timeWorkedEnd = new ArrayList<>();
-
-        for (int i = 0; i < hoursWorked.size(); i++) {
-            int endingHour = timeWorkedStart.get(i) + hoursWorked.get(i);
-            String formattedTime = formatTime(endingHour);
-            timeWorkedEnd.add(formattedTime);
-        }
-
-        List<String> timeWorkedStartFormatted = new ArrayList<>();
-        for (Integer integer : timeWorkedStart) {
-            String formattedTime = formatTime(integer);
-            timeWorkedStartFormatted.add(formattedTime);
-        }
-
-        model.addAttribute("hoursWorked", hoursWorked);
-        model.addAttribute("timeWorkedStart", timeWorkedStart);
-        model.addAttribute("timeWorkedStartFormatted", timeWorkedStartFormatted);
-        model.addAttribute("timeWorkedEnd", timeWorkedEnd);
-
-        daysLong = stubs.get(0).getDaysLong() - 1;
-        model.addAttribute("daysLong", daysLong);
-
-        String companyName = stubs.get(0).getName() + " Pay Stub";
-        model.addAttribute("companyName", companyName);
-        String companyAddress = stubs.get(0).getCompanyAddress();
-        model.addAttribute("companyAddress", companyAddress);
-        String companyEmail = stubs.get(0).getCompanyEmail();
-        model.addAttribute("companyEmail", companyEmail);
-
         return "stubs/index";
     }
 

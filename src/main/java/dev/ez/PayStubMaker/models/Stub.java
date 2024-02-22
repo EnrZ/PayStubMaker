@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Stub {
 
+    private int id;
+    private static int nextId = 1;
     private String name;
     private String companyAddress;
     private String companyEmail;
@@ -21,16 +23,21 @@ public class Stub {
     private List<Integer> startTime = new ArrayList<>();
 
 
-    //fed and state tax will be manual for now
+    //fed will be manual for now
     private BigDecimal federalTax;
+    private BigDecimal stateTax;
     private int stateTaxFiling;
 
     private BigDecimal previousDeduction;
     private int daysLong;
 
     private BigDecimal previousNetPay;
-
-
+    private BigDecimal YTDGrossIncome;
+    private int totalHours;
+    private BigDecimal totalGrossIncome;
+    private List<String> updatedDays;
+    private List<String> timeWorkedStartFormatted;
+    private List<String> timeWorkedEnd;
 
     //all arre required fields so a constructor with all will do
     public Stub(String name,String companyAddress, String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
@@ -49,6 +56,12 @@ public class Stub {
         this.startTime = startTime;
         this.previousNetPay = previousNetPay;
         this.stateTaxFiling = stateTaxFiling;
+        this.totalHours = totalHours;
+        this.totalGrossIncome = totalGrossIncome;
+        this.updatedDays = updatedDays;
+
+        this.id = nextId;
+        nextId++;
 
     }
 
@@ -183,6 +196,66 @@ public class Stub {
 
     public void setPreviousNetPay(BigDecimal previousNetPay) {
         this.previousNetPay = previousNetPay;
+    }
+
+    public int getTotalHours() {
+        return totalHours;
+    }
+
+    public void setTotalHours(int totalHours) {
+        this.totalHours = totalHours;
+    }
+
+    public BigDecimal getTotalGrossIncome() {
+        return totalGrossIncome;
+    }
+
+    public void setTotalGrossIncome(BigDecimal totalGrossIncome) {
+        this.totalGrossIncome = totalGrossIncome;
+    }
+
+    public List<String> getUpdatedDays() {
+        return updatedDays;
+    }
+
+    public void setUpdatedDays(List<String> updatedDays) {
+        this.updatedDays = updatedDays;
+    }
+
+    public BigDecimal getStateTax() {
+        return stateTax;
+    }
+
+    public void setStateTax(BigDecimal stateTax) {
+        this.stateTax = stateTax;
+    }
+
+    public List<String> getTimeWorkedStartFormatted() {
+        return timeWorkedStartFormatted;
+    }
+
+    public void setTimeWorkedStartFormatted(List<String> timeWorkedStartFormatted) {
+        this.timeWorkedStartFormatted = timeWorkedStartFormatted;
+    }
+
+    public List<String> getTimeWorkedEnd() {
+        return timeWorkedEnd;
+    }
+
+    public void setTimeWorkedEnd(List<String> timeWorkedEnd) {
+        this.timeWorkedEnd = timeWorkedEnd;
+    }
+
+    public BigDecimal getYTDGrossIncome() {
+        return YTDGrossIncome;
+    }
+
+    public void setYTDGrossIncome(BigDecimal YTDGrossIncome) {
+        this.YTDGrossIncome = YTDGrossIncome;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
