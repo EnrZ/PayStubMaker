@@ -91,8 +91,8 @@
     </tr>
     </thead>
     <tr>
-        <td th:text="${socSecContribution}"></td>
-        <td th:text="${medicareContribution}"></td>
+        <td th:text="${stub.socSecContribution}"></td>
+        <td th:text="${stub.medicareContribution}"></td>
         <td th:text="${stub.federalTax}"></td>
         <td th:text="${stub.stateTax}"></td>
     </tr>
@@ -108,10 +108,10 @@
     </tr>
     </thead>
     <tr>
-        <td th:text="${currentTotalDeduction}"></td>
-        <td th:text="${YTDDeduction}"></td>
-        <td th:text="${netPay}"></td>
-        <td th:text="${YTDnetPay}"></td>
+        <td th:text="${stub.currentTotalDeduction}"></td>
+        <td th:text="${stub.YTDDeduction}"></td>
+        <td th:text="${stub.netPay}"></td>
+        <td th:text="${stub.YTDnetPay}"></td>
     </tr>
 </table>
 

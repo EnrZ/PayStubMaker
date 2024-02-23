@@ -38,8 +38,13 @@ public class Stub {
     private List<String> updatedDays;
     private List<String> timeWorkedStartFormatted;
     private List<String> timeWorkedEnd;
-
-    //all arre required fields so a constructor with all will do
+    private BigDecimal socSecContribution;
+    private BigDecimal medicareContribution;
+    private BigDecimal currentTotalDeduction;
+    private BigDecimal YTDDeduction;
+    private BigDecimal netPay;
+    private BigDecimal YTDnetPay;
+    //all are required fields so a constructor with all will do
     public Stub(String name,String companyAddress, String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
         this.name = name;
         this.companyAddress = companyAddress;
@@ -252,6 +257,54 @@ public class Stub {
 
     public void setYTDGrossIncome(BigDecimal YTDGrossIncome) {
         this.YTDGrossIncome = YTDGrossIncome;
+    }
+
+    public BigDecimal getSocSecContribution() {
+        return socSecContribution;
+    }
+
+    public void setSocSecContribution(BigDecimal socSecContribution) {
+        this.socSecContribution = socSecContribution;
+    }
+
+    public BigDecimal getMedicareContribution() {
+        return medicareContribution;
+    }
+
+    public void setMedicareContribution(BigDecimal medicareContribution) {
+        this.medicareContribution = medicareContribution;
+    }
+
+    public BigDecimal getCurrentTotalDeduction() {
+        return currentTotalDeduction;
+    }
+
+    public void setCurrentTotalDeduction(BigDecimal currentTotalDeduction) {
+        this.currentTotalDeduction = currentTotalDeduction;
+    }
+
+    public BigDecimal getYTDDeduction() {
+        return YTDDeduction;
+    }
+
+    public void setYTDDeduction(BigDecimal YTDDeduction) {
+        this.YTDDeduction = YTDDeduction;
+    }
+
+    public BigDecimal getNetPay() {
+        return netPay;
+    }
+
+    public void setNetPay(BigDecimal netPay) {
+        this.netPay = netPay;
+    }
+
+    public BigDecimal getYTDnetPay() {
+        return YTDnetPay;
+    }
+
+    public void setYTDnetPay(BigDecimal YTDnetPay) {
+        this.YTDnetPay = YTDnetPay;
     }
 
     public int getId() {

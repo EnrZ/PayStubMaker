@@ -57,14 +57,13 @@ public class StubController {
             YTDGrossIncome = YTDGICalculations.setScale(2, RoundingMode.HALF_UP);
             stub.setYTDGrossIncome(YTDGrossIncome);
 
-
             SOCSECCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.062));
             socSecContribution = SOCSECCalculations.setScale(2, RoundingMode.UP);
-            model.addAttribute("socSecContribution", socSecContribution);
+            stub.setSocSecContribution(socSecContribution);
 
             MCCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.0145));
             medicareContribution = MCCalculations.setScale(2, RoundingMode.UP);
-            model.addAttribute("medicareContribution", medicareContribution);
+            stub.setMedicareContribution(medicareContribution);
 
             //Calling this method to calculate state tax
             stateTax = stateTaxFormula(stub.getStateTaxFiling(), totalGrossIncome);
@@ -75,19 +74,19 @@ public class StubController {
             contributionCalculations = medicareContribution.add(socSecContribution);
             deductionCalculations = taxCalculations.add(contributionCalculations);
             currentTotalDeduction = deductionCalculations.setScale(2, RoundingMode.UP);
-            model.addAttribute("currentTotalDeduction", currentTotalDeduction);
+            stub.setCurrentTotalDeduction(currentTotalDeduction);
 
             YTDDeductionCalculations = currentTotalDeduction.add(stub.getPreviousDeduction());
             YTDDeduction = YTDDeductionCalculations.setScale(2, RoundingMode.UP);
-            model.addAttribute("YTDDeduction", YTDDeduction);
+            stub.setYTDDeduction(YTDDeduction);
 
             netPayCalculations = totalGrossIncome.subtract(currentTotalDeduction);
             netPay = netPayCalculations.setScale(2, RoundingMode.UP);
-            model.addAttribute("netPay", netPay);
+            stub.setNetPay(netPay);
 
             YTDnetPayCalculations = netPay.add(stub.getPreviousNetPay());
             YTDnetPay = YTDnetPayCalculations.setScale(2, RoundingMode.UP);
-            model.addAttribute("YTDnetPay", YTDnetPay);
+            stub.setYTDnetPay(YTDnetPay);
 
             beginningDay = stub.getPayPeriodBeginning();
             if (daysOfWeek.contains(beginningDay)) {
