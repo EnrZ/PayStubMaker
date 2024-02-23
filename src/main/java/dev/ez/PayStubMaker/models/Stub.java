@@ -26,6 +26,7 @@ public class Stub {
     //fed will be manual for now
     private BigDecimal federalTax;
     private BigDecimal stateTax;
+    private List<Integer> federalTaxFiling = new ArrayList<>();
     private int stateTaxFiling;
 
     private BigDecimal previousDeduction;
@@ -305,6 +306,14 @@ public class Stub {
 
     public void setYTDnetPay(BigDecimal YTDnetPay) {
         this.YTDnetPay = YTDnetPay;
+    }
+
+    public List<Integer> getFederalTaxFiling() {
+        return federalTaxFiling;
+    }
+
+    public void setFederalTaxFiling(List<Integer> federalTaxFiling) {
+        this.federalTaxFiling = federalTaxFiling;
     }
 
     public int getId() {

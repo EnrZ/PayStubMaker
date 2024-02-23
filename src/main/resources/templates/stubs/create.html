@@ -55,9 +55,21 @@
     <div style="clear:both"></div>
     Enter previous yearly gross income here ->>> <input type="text" name="yearlyPreviousGross">
     <div style="clear:both"></div>
-    Enter the federal tax here ->>> <input type="number" name="federalTax">
+    Enter the employee federal filing status here ->>> <select name="federalTaxFiling">
+        <option disabled selected value> -- select an option -- </option>
+        <option value="2">Single</option>
+        <option value="0">Married Filing Jointly</option>
+        <option value="2">Married Filing Separately</option>
+        <option value="1">Head of Household</option>
+    </select>
+    <select name="federalTaxFiling">
+    Standard withholding or Form W-4/Step 2/Check withholding
+        <option disabled selected value> -- select an option -- </option>
+        <option value="0">Standard withholding</option>
+        <option value="1">Form-W4, Step 2, Checkbox withholding</option>
+    </select>
     <div style="clear:both"></div>
-    Enter the employee filing status here ->>> <select name="stateTaxFiling">
+    Enter the employee state filing status here ->>> <select name="stateTaxFiling">
         <option disabled selected value> -- select an option -- </option>
         <option value="0">Single</option>
         <option value="0">Married Filing Combined - Spouse Works</option>

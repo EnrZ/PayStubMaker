@@ -69,6 +69,9 @@ public class StubController {
             stateTax = stateTaxFormula(stub.getStateTaxFiling(), totalGrossIncome);
             stub.setStateTax(stateTax);
 
+            federalTax = federalTaxFormula(stub.getFederalTaxFiling(),totalGrossIncome);
+            stub.setFederalTax(federalTax);
+
 
             taxCalculations = stub.getFederalTax().add(stateTax);
             contributionCalculations = medicareContribution.add(socSecContribution);
@@ -147,6 +150,131 @@ public class StubController {
         }
     }
 
+    private static BigDecimal federalTaxFormula(List<Integer> status, BigDecimal wages) {
+        BigDecimal result = null;
+        int WagesInt = wages.intValue();
+        if (status.get(0) == 0) {
+            //Married Filing Jointly Standing withholding
+            if (status.get(1) == 0) {
+                if (WagesInt < 1215) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 1215 && WagesInt < 1230) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+            //Married Filing Jointly W4 etc.
+            if (status.get(1) == 1) {
+                if (WagesInt < 615) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 615 && WagesInt < 630) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+        }
+        if (status.get(0) == 1) {
+            //Head of Household Standing withholding
+            if (status.get(1) == 0) {
+                if (WagesInt < 915) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 915 && WagesInt < 930) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+            //Head of Household W4 etc.
+            if(status.get(1) == 1){
+                if (WagesInt < 465) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 465 && WagesInt < 475) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+
+        }
+        if (status.get(0) == 2) {
+            //Single Standing withholding
+            if (status.get(1) == 0) {
+                if (WagesInt < 615) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 615 && WagesInt < 630) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+            if (status.get(1) == 1) {
+                //Single W4 etc.
+                if (WagesInt < 305) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 305 && WagesInt < 315) {
+                    result = BigDecimal.valueOf(1);
+                } else if (WagesInt >= 315 && WagesInt < 325) {
+                    result = BigDecimal.valueOf(2);
+                } else if (WagesInt >= 325 && WagesInt < 335) {
+                    result = BigDecimal.valueOf(3);
+                } else if (WagesInt >= 335 && WagesInt < 345) {
+                    result = BigDecimal.valueOf(4);
+                } else if (WagesInt >= 345 && WagesInt < 355) {
+                    result = BigDecimal.valueOf(5);
+                } else if (WagesInt >= 355 && WagesInt < 365) {
+                    result = BigDecimal.valueOf(6);
+                } else if (WagesInt >= 365 && WagesInt < 375) {
+                    result = BigDecimal.valueOf(7);
+                } else if (WagesInt >= 375 && WagesInt < 385) {
+                    result = BigDecimal.valueOf(8);
+                } else if (WagesInt >= 385 && WagesInt < 395) {
+                    result = BigDecimal.valueOf(9);
+                } else if (WagesInt >= 395 && WagesInt < 405) {
+                    result = BigDecimal.valueOf(10);
+                } else if (WagesInt >= 405 && WagesInt < 415) {
+                    result = BigDecimal.valueOf(11);
+                } else if (WagesInt >= 415 && WagesInt < 425) {
+                    result = BigDecimal.valueOf(12);
+                } else if (WagesInt >= 425 && WagesInt < 435) {
+                    result = BigDecimal.valueOf(13);
+                } else if (WagesInt >= 435 && WagesInt < 445) {
+                    result = BigDecimal.valueOf(14);
+                } else if (WagesInt >= 445 && WagesInt < 455) {
+                    result = BigDecimal.valueOf(15);
+                } else if (WagesInt >= 455 && WagesInt < 465) {
+                    result = BigDecimal.valueOf(16);
+                } else if (WagesInt >= 465 && WagesInt < 475) {
+                    result = BigDecimal.valueOf(17);
+                } else if (WagesInt >= 475 && WagesInt < 485) {
+                    result = BigDecimal.valueOf(18);
+                } else if (WagesInt >= 485 && WagesInt < 495) {
+                    result = BigDecimal.valueOf(19);
+                } else if (WagesInt >= 495 && WagesInt < 505) {
+                    result = BigDecimal.valueOf(20);
+                } else if (WagesInt >= 505 && WagesInt < 515) {
+                    result = BigDecimal.valueOf(21);
+                } else if (WagesInt >= 515 && WagesInt < 525) {
+                    result = BigDecimal.valueOf(22);
+                } else if (WagesInt >= 525 && WagesInt < 535) {
+                    result = BigDecimal.valueOf(23);
+                } else if (WagesInt >= 535 && WagesInt < 545) {
+                    result = BigDecimal.valueOf(24);
+                } else if (WagesInt >= 545 && WagesInt < 555) {
+                    result = BigDecimal.valueOf(25);
+                } else if (WagesInt >= 555 && WagesInt < 570) {
+                    result = BigDecimal.valueOf(26);
+                } else if (WagesInt >= 570 && WagesInt < 585) {
+                    result = BigDecimal.valueOf(28);
+                } else if (WagesInt >= 585 && WagesInt < 600) {
+                    result = BigDecimal.valueOf(30);
+                } else if (WagesInt >= 600 && WagesInt < 615) {
+                    result = BigDecimal.valueOf(32);
+                } else if (WagesInt >= 615 && WagesInt < 630) {
+                    result = BigDecimal.valueOf(33);
+                } else if (WagesInt >= 630 && WagesInt < 645) {
+                    result = BigDecimal.valueOf(35);
+                } else if (WagesInt >= 645 && WagesInt < 660) {
+                    result = BigDecimal.valueOf(37);
+                } else if (WagesInt >= 660 && WagesInt < 675) {
+                    result = BigDecimal.valueOf(39);
+                }
+            }
+        }
+        return result;
+    }
+    //MO
     private static BigDecimal stateTaxFormula(int status, BigDecimal wages) {
         BigDecimal result = null;
         int MOWages = wages.intValue();
@@ -484,7 +612,6 @@ public class StubController {
             } else {
                 result = BigDecimal.valueOf(69);
             }
-            ;
 
         }
 
