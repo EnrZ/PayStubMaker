@@ -1,5 +1,7 @@
 body {
 font-size: 20px;
+-webkit-print-color-adjust:exact !important;
+print-color-adjust:exact !important;
 }
 .error{
 color: red;
@@ -22,4 +24,21 @@ font-weight: normal;
 
 table[name="basicWorkInfo"] {
 padding-top: 5px;
+border-bottom: 1px solid #ddd; /* Add a bottom border to cells */
+}
+
+table[name="moneyInfo"]{
+border-bottom: 1px solid #ddd; /* Add a bottom border to cells */
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd; /* Add a light border */
+}
+.table th, .table td {
+    text-align: left;
+}
+.table th {
+    background-color: #f5f5f5; /* Light gray background for table headers */
 }
