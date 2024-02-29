@@ -17,6 +17,8 @@
     <div style="clear:both"></div>
     Company Address  <input type="text" name="companyAddress">
     <div style="clear:both"></div>
+    Company Phone Number  <input type="tel" name="phoneNumber" value="3146014345">
+    <div style="clear:both"></div>
     Company Email  <input type="email" name="companyEmail">
     <div style="clear:both"></div>
     Employee Name <input type="text" name="employee">
@@ -53,7 +55,7 @@
     <div style="clear:both"></div>
     Type hourly pay rate here ----> <input type="number" name="hourlyPayRate">
     <div style="clear:both"></div>
-    Enter previous yearly gross income here ->>> <input type="text" name="yearlyPreviousGross">
+    Enter previous yearly gross income here ->>> <input type="number" step="0.01" name="yearlyPreviousGross">
     <div style="clear:both"></div>
     Enter the employee federal filing status here ->>> <select name="federalTaxFiling">
         <option disabled selected value> -- select an option -- </option>
@@ -77,10 +79,10 @@
         <option value="1">Head of Household</option>
         <option value="2">Married Filing Combined - Spouse Doesn't Work</option>
     </select>
+    <div style="clear:both"></div> <!--step="0.01" number with 2 decimal places  -->
+    Enter previous deduction total here ->>>>> <input type="number" step="0.01" name="previousDeduction">
     <div style="clear:both"></div>
-    Enter previous deduction total here ->>>>> <input type="number" name="previousDeduction">
-    <div style="clear:both"></div>
-    Enter previous net pay total here ->>>>> <input type="number" name="previousNetPay">
+    Enter previous net pay total here ->>>>> <input type="number" step="0.01" name="previousNetPay">
     <div style="clear:both"></div>
     <input type="submit" value="Create Stub">
 </form>

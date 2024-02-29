@@ -10,6 +10,7 @@ public class Stub {
     private static int nextId = 1;
     private String name;
     private String companyAddress;
+    private String phoneNumber;
     private String companyEmail;
     private String employee;
     private String checkNumber;
@@ -46,7 +47,7 @@ public class Stub {
     private BigDecimal netPay;
     private BigDecimal YTDnetPay;
     //all are required fields so a constructor with all will do
-    public Stub(String name,String companyAddress, String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
+    public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
         this.name = name;
         this.companyAddress = companyAddress;
         this.companyEmail = companyEmail;
@@ -65,6 +66,7 @@ public class Stub {
         this.totalHours = totalHours;
         this.totalGrossIncome = totalGrossIncome;
         this.updatedDays = updatedDays;
+        this.phoneNumber = phoneNumber;
 
         this.id = nextId;
         nextId++;
@@ -85,6 +87,10 @@ public class Stub {
     public void setCompanyAddress(String companyAddress) {
         this.companyAddress = companyAddress;
     }
+
+    public String getPhoneNumber() {return phoneNumber;}
+
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
 
     public String getCompanyEmail() {
         return companyEmail;
