@@ -141,12 +141,12 @@ public class StubController {
         hour = hour % 24;
         if (hour > 0 && hour < 12) {
             return hour + " AM";
-        } else if (hour == 0) {
-            return " ";
         } else if (hour == 12) {
             return "12 PM";
-        } else {
+        } else if (hour > 12) {
             return (hour - 12) + " PM";
+        } else {
+            return " ";
         }
     }
 
