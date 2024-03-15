@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div th:each="stub : ${stubs}">
+<!-- Display the initial checkNumber -->
+<p>Initial Check Number: <span th:text="${stub.checkNumber}"></span></p>
+
+<!-- Input field for editing -->
+<input type="text" name="checkNumber" th:value="${stub.checkNumber}" />
+<button onclick="updateCheckNumber()">Update</button>
+
+</div>
+<script>
+        function updateCheckNumber() {
+            // Get the new checkNumber from the input field
+            const newCheckNumber = document.querySelector('input[name="checkNumber"]').value;
+
+            // Update the displayed checkNumber
+            document.getElementById("checkNumberDisplay").textContent = newCheckNumber;
+        }
+    </script>
+
+</body>
+</html>

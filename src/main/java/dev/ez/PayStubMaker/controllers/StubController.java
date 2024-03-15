@@ -1,6 +1,8 @@
 package dev.ez.PayStubMaker.controllers;
 
 import dev.ez.PayStubMaker.models.Stub;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -123,7 +125,16 @@ public class StubController {
         }
         return "stubs/index";
     }
+    @GetMapping("update")
+    public String displayUpdateForm(Model model) {
 
+        //Goes through each stub
+        for (Stub stub : stubs) {
+            model.addAttribute("stubs", stubs);
+
+        }
+        return "stubs/update";
+    }
     // /stubs/create route
     @GetMapping("create")
     public String renderCreateStubForm() {
