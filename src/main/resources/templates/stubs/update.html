@@ -6,24 +6,11 @@
 </head>
 <body>
 
-<div th:each="stub : ${stubs}">
-<!-- Display the initial checkNumber -->
-<p>Initial Check Number: <span th:text="${stub.checkNumber}"></span></p>
 
-<!-- Input field for editing -->
-<input type="text" name="checkNumber" th:value="${stub.checkNumber}" />
-<button onclick="updateCheckNumber()">Update</button>
-
+    <form method="POST" action="/stubs/update">
+        <input type="text" name="newCheckNumber" >
+        <input type="submit" value="Update checkNumber">
+    </form>
 </div>
-<script>
-        function updateCheckNumber() {
-            // Get the new checkNumber from the input field
-            const newCheckNumber = document.querySelector('input[name="checkNumber"]').value;
-
-            // Update the displayed checkNumber
-            document.getElementById("checkNumberDisplay").textContent = newCheckNumber;
-        }
-    </script>
-
 </body>
 </html>

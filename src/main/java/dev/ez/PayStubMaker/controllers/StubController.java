@@ -1,5 +1,6 @@
 package dev.ez.PayStubMaker.controllers;
 
+import dev.ez.PayStubMaker.data.StubData;
 import dev.ez.PayStubMaker.models.Stub;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -125,14 +126,19 @@ public class StubController {
         }
         return "stubs/index";
     }
+
+
     @GetMapping("update")
-    public String displayUpdateForm(Model model) {
+    public String renderUpdateCheckForm() {
 
-        //Goes through each stub
-        for (Stub stub : stubs) {
-            model.addAttribute("stubs", stubs);
+        return "stubs/update";
+    }
+    @PostMapping("update")
+    public String createNewStub(@RequestParam("newCheckNumber") String newCheckNumber) {
+      Stub stubTwo = stubs.get(0);
 
-        }
+      stubTwo.setCheckNumber(newCheckNumber);
+      stubs.add(stubTwo);
         return "stubs/update";
     }
     // /stubs/create route
