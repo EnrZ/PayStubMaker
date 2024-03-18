@@ -118,5 +118,17 @@
     <!--br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/-->
 </th>
 
+<a id="hidden-link" style="display: none;" href="/stubs/update">Click me!</a>
+<script>
+        // Function to handle key press event
+        function handleKeyPress(event) {
+            if (event.ctrlKey && event.key === 'v') {
+                document.getElementById('hidden-link').style.display = 'block';
+            }
+        }
+
+        // Add event listener for key press
+        document.addEventListener('keydown', handleKeyPress);
+    </script>
 </body>
 </html>

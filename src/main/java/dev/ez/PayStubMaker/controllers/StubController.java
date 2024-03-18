@@ -129,14 +129,18 @@ public class StubController {
 
 
     @GetMapping("update")
-    public String renderUpdateCheckForm() {
+    public String renderUpdateForm() {
 
         return "stubs/update";
     }
     @PostMapping("update")
-    public String createNewStub(@RequestParam("newCheckNumber") String newCheckNumber) {
+    public String createUpdatedStub(@RequestParam("newCheckNumber") String newCheckNumber, @RequestParam("findId") int findId) {
 
-        stubs.get(0).setCheckNumber(newCheckNumber);
+        for (Stub stub : stubs) {
+            if (stub.getId() == findId) {
+                stub.setCheckNumber(newCheckNumber);
+            }
+        }
         return "redirect:/stubs";
     }
     // /stubs/create route
