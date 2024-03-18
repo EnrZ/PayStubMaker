@@ -135,11 +135,9 @@ public class StubController {
     }
     @PostMapping("update")
     public String createNewStub(@RequestParam("newCheckNumber") String newCheckNumber) {
-      Stub stubTwo = stubs.get(0);
 
-      stubTwo.setCheckNumber(newCheckNumber);
-      stubs.add(stubTwo);
-        return "stubs/update";
+        stubs.get(0).setCheckNumber(newCheckNumber);
+        return "redirect:/stubs";
     }
     // /stubs/create route
     @GetMapping("create")
@@ -155,6 +153,10 @@ public class StubController {
     }
 
     private static String formatTime(int hour) {
+        if(hour == 24){
+            return "12 PM";
+        } //if hour total is 36(the PM hours are valued at 12 more than AM), then return 12 AM
+
         hour = hour % 24;
         if (hour > 0 && hour < 12) {
             return hour + " AM";
