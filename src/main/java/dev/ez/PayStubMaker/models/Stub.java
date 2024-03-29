@@ -19,7 +19,7 @@ public class Stub {
     private String payDay;
     private List<Integer> hoursWorkedEachDay = new ArrayList<>();
     private int hourlyPayRate;
-    private BigDecimal yearlyPreviousGross;
+    private BigDecimal yearlyPreviousGross, yearlyPreviousFed,yearlyPreviousState, yearlyPreviousSocSec, yearlyPreviousMedicare;
 
     private List<Integer> startTime = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class Stub {
     private int daysLong;
 
     private BigDecimal previousNetPay;
-    private BigDecimal YTDGrossIncome;
+    private BigDecimal YTDGrossIncome,YTDFed,YTDState,YTDSocSec,YTDMedicare;
     private int totalHours;
     private BigDecimal totalGrossIncome;
     private List<String> updatedDays;
@@ -47,7 +47,7 @@ public class Stub {
     private BigDecimal netPay;
     private BigDecimal YTDnetPay;
     //all are required fields so a constructor with all will do
-    public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
+    public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, BigDecimal yearlyPreviousFed, BigDecimal yearlyPreviousState, BigDecimal yearlyPreviousSocSec, BigDecimal yearlyPreviousMedicare, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
         this.name = name;
         this.companyAddress = companyAddress;
         this.companyEmail = companyEmail;
@@ -57,6 +57,10 @@ public class Stub {
         this.payDay = payDay;
         this.hourlyPayRate = hourlyPayRate;
         this.yearlyPreviousGross = yearlyPreviousGross;
+        this.yearlyPreviousFed = yearlyPreviousFed;
+        this.yearlyPreviousState = yearlyPreviousState;
+        this.yearlyPreviousSocSec = yearlyPreviousSocSec;
+        this.yearlyPreviousMedicare = yearlyPreviousMedicare;
         this.previousDeduction = previousDeduction;
         this.payPeriodBeginning = payPeriodBeginning;
         this.daysLong = daysLong;
@@ -162,6 +166,38 @@ public class Stub {
         this.yearlyPreviousGross = yearlyPreviousGross;
     }
 
+    public BigDecimal getYearlyPreviousFed() {
+        return yearlyPreviousFed;
+    }
+
+    public void setYearlyPreviousFed(BigDecimal yearlyPreviousFed) {
+        this.yearlyPreviousFed = yearlyPreviousFed;
+    }
+
+    public BigDecimal getYearlyPreviousState() {
+        return yearlyPreviousState;
+    }
+
+    public void setYearlyPreviousState(BigDecimal yearlyPreviousState) {
+        this.yearlyPreviousState = yearlyPreviousState;
+    }
+
+    public BigDecimal getYearlyPreviousSocSec() {
+        return yearlyPreviousSocSec;
+    }
+
+    public void setYearlyPreviousSocSec(BigDecimal yearlyPreviousSocSec) {
+        this.yearlyPreviousSocSec = yearlyPreviousSocSec;
+    }
+
+    public BigDecimal getYearlyPreviousMedicare() {
+        return yearlyPreviousMedicare;
+    }
+
+    public void setYearlyPreviousMedicare(BigDecimal yearlyPreviousMedicare) {
+        this.yearlyPreviousMedicare = yearlyPreviousMedicare;
+    }
+
     public BigDecimal getFederalTax() {
         return federalTax;
     }
@@ -260,6 +296,38 @@ public class Stub {
 
     public BigDecimal getYTDGrossIncome() {
         return YTDGrossIncome;
+    }
+
+    public BigDecimal getYTDFed() {
+        return YTDFed;
+    }
+
+    public void setYTDFed(BigDecimal YTDFed) {
+        this.YTDFed = YTDFed;
+    }
+
+    public BigDecimal getYTDState() {
+        return YTDState;
+    }
+
+    public void setYTDState(BigDecimal YTDState) {
+        this.YTDState = YTDState;
+    }
+
+    public BigDecimal getYTDSocSec() {
+        return YTDSocSec;
+    }
+
+    public void setYTDSocSec(BigDecimal YTDSocSec) {
+        this.YTDSocSec = YTDSocSec;
+    }
+
+    public BigDecimal getYTDMedicare() {
+        return YTDMedicare;
+    }
+
+    public void setYTDMedicare(BigDecimal YTDMedicare) {
+        this.YTDMedicare = YTDMedicare;
     }
 
     public void setYTDGrossIncome(BigDecimal YTDGrossIncome) {

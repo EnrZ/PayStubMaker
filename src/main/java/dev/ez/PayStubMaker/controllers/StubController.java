@@ -35,6 +35,7 @@ public class StubController {
         BigDecimal federalTax, stateTax;
         BigDecimal taxCalculations, contributionCalculations, deductionCalculations, currentTotalDeduction;
         BigDecimal YTDDeduction, YTDDeductionCalculations, netPay, netPayCalculations, YTDnetPay, YTDnetPayCalculations;
+        BigDecimal YTDFedCalculations, YTDFed, YTDStateCalculations, YTDState, YTDSocSecCalculations, YTDSocSec, YTDMedicareCalculations,YTDMedicare;
 
         List<String> daysOfWeek = new ArrayList<>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
         String beginningDay;
@@ -64,9 +65,19 @@ public class StubController {
             socSecContribution = SOCSECCalculations.setScale(2, RoundingMode.UP);
             stub.setSocSecContribution(socSecContribution);
 
+            //Soc Sec YTD
+            YTDSocSecCalculations = socSecContribution.add(stub.getYearlyPreviousSocSec());
+            YTDSocSec = YTDSocSecCalculations.setScale(2,RoundingMode.UP);
+            stub.setYTDSocSec(YTDSocSec);
+
             MCCalculations = totalGrossIncome.multiply(BigDecimal.valueOf(0.0145));
             medicareContribution = MCCalculations.setScale(2, RoundingMode.UP);
             stub.setMedicareContribution(medicareContribution);
+
+            //Medicare YTD
+            YTDMedicareCalculations = medicareContribution.add(stub.getYearlyPreviousMedicare());
+            YTDMedicare = YTDMedicareCalculations.setScale(2,RoundingMode.UP);
+            stub.setYTDMedicare(YTDMedicare);
 
             //Calling this method to calculate state tax
             stateTax = stateTaxFormula(stub.getStateTaxFiling(), totalGrossIncome);
@@ -75,8 +86,16 @@ public class StubController {
             federalTax = federalTaxFormula(stub.getFederalTaxFiling(),totalGrossIncome);
             stub.setFederalTax(federalTax);
 
+            //Fed and State YTD Calculations
+            YTDFedCalculations = federalTax.add(stub.getYearlyPreviousFed());
+            YTDFed = YTDFedCalculations.setScale(2,RoundingMode.UP);
+            stub.setYTDFed(YTDFed);
+            YTDStateCalculations = stateTax.add(stub.getYearlyPreviousState());
+            YTDState = YTDStateCalculations.setScale(2,RoundingMode.UP);
+            stub.setYTDState(YTDState);
 
             taxCalculations = stub.getFederalTax().add(stateTax);
+
             contributionCalculations = medicareContribution.add(socSecContribution);
             deductionCalculations = taxCalculations.add(contributionCalculations);
             currentTotalDeduction = deductionCalculations.setScale(2, RoundingMode.UP);

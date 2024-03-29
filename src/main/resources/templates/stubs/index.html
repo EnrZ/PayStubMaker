@@ -81,24 +81,64 @@
     </tr>
 </table>
 
-<table class="table" name="MoneyInfo">
-    <thead>
-    <tr>
-        <th>Social Security Contribution</th>
-        <th>Medicare Contribution</th>
-        <th>Federal Tax</th>
-        <th>State Tax</th>
-    </tr>
-    </thead>
-    <tr>
-        <td th:text="${stub.socSecContribution}"></td>
-        <td th:text="${stub.medicareContribution}"></td>
-        <td th:text="${stub.federalTax}"></td>
-        <td th:text="${stub.stateTax}"></td>
-    </tr>
-</table>
+    <table class="table" name="MoneyInfo">
+        <thead>
+        <tr>
+            <th>Federal Tax</th>
+            <th>Yearly Previous Federal Tax</th>
+            <th>Year-to-Date Federal Tax</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${stub.federalTax}"></td>
+            <td th:text="${stub.yearlyPreviousFed}"></td>
+            <td th:text="${stub.YTDFed}"></td>
+        </tr>
+    </table>
+    <table class="table" name="MoneyInfo">
+        <thead>
+        <tr>
+            <th>State Tax</th>
+            <th>Yearly Previous State Tax</th>
+            <th>Year-to-Date State Tax</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${stub.stateTax}"></td>
+            <td th:text="${stub.yearlyPreviousState}"></td>
+            <td th:text="${stub.YTDState}"></td>
+        </tr>
+    </table>
+    <table class="table" name="MoneyInfo">
+        <thead>
+        <tr>
+            <th>Social Security Contribution</th>
+            <th>Yearly Previous Social Security Contribution</th>
+            <th>Year-to-Date Social Security Contribution</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${stub.socSecContribution}"></td>
+            <td th:text="${stub.yearlyPreviousSocSec}"></td>
+            <td th:text="${stub.YTDSocSec}"></td>
+        </tr>
+    </table>
 
-<table class="table" name="MoneyInfo">
+    <table class="table" name="MoneyInfo">
+        <thead>
+        <tr>
+            <th>Medicare Contribution</th>
+            <th>Yearly Previous Medicare Contribution</th>
+            <th>Year-to-Date Medicare Contribution</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${stub.medicareContribution}"></td>
+            <td th:text="${stub.yearlyPreviousMedicare}"></td>
+            <td th:text="${stub.YTDMedicare}"></td>
+        </tr>
+    </table>
+    <table class="table" name="MoneyInfo">
     <thead>
     <tr>
         <th>Current Total Deduction</th>
