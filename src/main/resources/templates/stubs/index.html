@@ -98,12 +98,14 @@
         <thead>
         <tr>
             <th>Federal Tax</th>
+            <th>Status</th>
             <th>Yearly Previous Federal Tax</th>
             <th>Year-to-Date Federal Tax</th>
         </tr>
         </thead>
         <tr>
             <td th:text="${stub.federalTax}"></td>
+            <td th:text="${stub.federalTaxFiling[0]}"></td>
             <td th:text="${stub.yearlyPreviousFed}"></td>
             <td th:text="${stub.YTDFed}"></td>
         </tr>
