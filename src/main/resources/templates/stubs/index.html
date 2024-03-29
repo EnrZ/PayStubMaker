@@ -18,24 +18,37 @@
 <h5 th:text="${stub.companyEmail}"></h5>
 
 
+    <table name ="basicWorkInfo" class="table">
+        <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Employee Address</th>
+            <th>Employee ID</th>
+        </tr>
+        </thead>
+        <tr>
+            <td th:text="${stub.employee}"></td>
+            <td th:text="${stub.employeeAddress}"></td>
+            <td th:text="${stub.employeeId}"></td>
+        </tr>
+    </table>
+
 <table name ="basicWorkInfo" class="table">
     <thead>
     <tr>
-        <th>Employee Name</th>
         <th>Check Number</th>
         <th>Pay Period</th>
         <th>Pay Day</th>
     </tr>
     </thead>
     <tr>
-        <td th:text="${stub.employee}"></td>
         <td th:text="${stub.checkNumber}"></td>
         <td th:text="${stub.payPeriod}"></td>
         <td th:text="${stub.payDay}"></td>
     </tr>
 </table>
 
-<table class="table">
+<table class="table" name="details">
     <thead>
     <tr>
         <th></th>

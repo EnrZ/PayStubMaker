@@ -192,12 +192,12 @@ public class StubController {
         }
     }
 
-    private static BigDecimal federalTaxFormula(List<Integer> status, BigDecimal wages) {
+    private static BigDecimal federalTaxFormula(List<String> status, BigDecimal wages) {
         BigDecimal result = null;
         int WagesInt = wages.intValue();
-        if (status.get(0) == 0) {
+        if (status.get(0).equals(0)) {
             //Married Filing Jointly Standing withholding
-            if (status.get(1) == 0) {
+            if (status.get(1).equals(0)) {
                 if (WagesInt < 1215) {
                     result = BigDecimal.valueOf(0);
                 } else if (WagesInt >= 1215 && WagesInt < 1230) {
@@ -205,7 +205,7 @@ public class StubController {
                 }
             }
             //Married Filing Jointly W4 etc.
-            if (status.get(1) == 1) {
+            if (status.get(1).equals(1)) {
                 if (WagesInt < 615) {
                     result = BigDecimal.valueOf(0);
                 } else if (WagesInt >= 615 && WagesInt < 630) {
@@ -213,9 +213,9 @@ public class StubController {
                 }
             }
         }
-        if (status.get(0) == 1) {
+        if (status.get(0).equals(1)) {
             //Head of Household Standing withholding
-            if (status.get(1) == 0) {
+            if (status.get(1).equals(0)) {
                 if (WagesInt < 915) {
                     result = BigDecimal.valueOf(0);
                 } else if (WagesInt >= 915 && WagesInt < 930) {
@@ -223,7 +223,7 @@ public class StubController {
                 }
             }
             //Head of Household W4 etc.
-            if(status.get(1) == 1){
+            if(status.get(1).equals(1)){
                 if (WagesInt < 465) {
                     result = BigDecimal.valueOf(0);
                 } else if (WagesInt >= 465 && WagesInt < 475) {
@@ -232,16 +232,16 @@ public class StubController {
             }
 
         }
-        if (status.get(0) == 2) {
+        if (status.get(0).equals("s") || status.get(0).equals("sep")) {
             //Single Standing withholding
-            if (status.get(1) == 0) {
+            if (status.get(1).equals("0")) {
                 if (WagesInt < 615) {
                     result = BigDecimal.valueOf(0);
                 } else if (WagesInt >= 615 && WagesInt < 630) {
                     result = BigDecimal.valueOf(1);
                 }
             }
-            if (status.get(1) == 1) {
+            if (status.get(1).equals("1")) {
                 //Single W4 etc.
                 if (WagesInt < 305) {
                     result = BigDecimal.valueOf(0);

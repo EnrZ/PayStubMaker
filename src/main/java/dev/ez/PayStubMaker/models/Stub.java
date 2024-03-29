@@ -12,7 +12,7 @@ public class Stub {
     private String companyAddress;
     private String phoneNumber;
     private String companyEmail;
-    private String employee;
+    private String employee, employeeAddress, employeeId;
     private String checkNumber;
     private String payPeriod;
     private String payPeriodBeginning;
@@ -27,7 +27,7 @@ public class Stub {
     //fed will be manual for now
     private BigDecimal federalTax;
     private BigDecimal stateTax;
-    private List<Integer> federalTaxFiling = new ArrayList<>();
+    private List<String> federalTaxFiling = new ArrayList<>();
     private int stateTaxFiling;
 
     private BigDecimal previousDeduction;
@@ -47,11 +47,11 @@ public class Stub {
     private BigDecimal netPay;
     private BigDecimal YTDnetPay;
     //all are required fields so a constructor with all will do
-    public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, BigDecimal yearlyPreviousFed, BigDecimal yearlyPreviousState, BigDecimal yearlyPreviousSocSec, BigDecimal yearlyPreviousMedicare, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
+    public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String employeeAddress, String employeeId, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, BigDecimal yearlyPreviousFed, BigDecimal yearlyPreviousState, BigDecimal yearlyPreviousSocSec, BigDecimal yearlyPreviousMedicare, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
         this.name = name;
         this.companyAddress = companyAddress;
         this.companyEmail = companyEmail;
-        this.employee = employee;
+        this.employee = employee; this.employeeAddress = employeeAddress; this.employeeId = employeeId;
         this.checkNumber = checkNumber;
         this.payPeriod = payPeriod;
         this.payDay = payDay;
@@ -110,6 +110,22 @@ public class Stub {
 
     public void setEmployee(String employee) {
         this.employee = employee;
+    }
+
+    public String getEmployeeAddress() {
+        return employeeAddress;
+    }
+
+    public void setEmployeeAddress(String employeeAddress) {
+        this.employeeAddress = employeeAddress;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
     }
 
     public String getCheckNumber() {
@@ -205,6 +221,7 @@ public class Stub {
     public void setFederalTax(BigDecimal federalTax) {
         this.federalTax = federalTax;
     }
+
 
     public int getStateTaxFiling() {
         return stateTaxFiling;
@@ -382,11 +399,11 @@ public class Stub {
         this.YTDnetPay = YTDnetPay;
     }
 
-    public List<Integer> getFederalTaxFiling() {
+    public List<String> getFederalTaxFiling() {
         return federalTaxFiling;
     }
 
-    public void setFederalTaxFiling(List<Integer> federalTaxFiling) {
+    public void setFederalTaxFiling(List<String> federalTaxFiling) {
         this.federalTaxFiling = federalTaxFiling;
     }
 

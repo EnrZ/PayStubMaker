@@ -42,3 +42,7 @@ border-bottom: 1px solid #ddd; /* Add a bottom border to cells */
 .table th {
     background-color: #C0C0C0;
 }
+
+table[name="details"]{
+font-size: 14px;
+}
