@@ -153,15 +153,21 @@ public class StubController {
         return "stubs/update";
     }
     @PostMapping("update")
-    public String createUpdatedStub(@RequestParam("newCheckNumber") String newCheckNumber, @RequestParam("findId") int findId) {
+    public String createUpdatedStub(@RequestParam(value = "newCheckNumber", required = false) String newCheckNumber, @RequestParam("findId") int findId, @RequestParam(value = "newPayDay", required = false) String newPayDay) {
 
         for (Stub stub : stubs) {
             if (stub.getId() == findId) {
-                stub.setCheckNumber(newCheckNumber);
+                if (newCheckNumber != null && !newCheckNumber.isEmpty()) {
+                    stub.setCheckNumber(newCheckNumber);
+                }
+                if (newPayDay != null && !newPayDay.isEmpty()) {
+                    stub.setPayDay(newPayDay);
+                }
             }
         }
-        return "redirect:/stubs";
-    }
+            return "redirect:/stubs";
+        }
+
     // /stubs/create route
     @GetMapping("create")
     public String renderCreateStubForm() {
