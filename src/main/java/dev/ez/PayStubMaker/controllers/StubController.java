@@ -2,10 +2,12 @@ package dev.ez.PayStubMaker.controllers;
 
 import dev.ez.PayStubMaker.data.StubData;
 import dev.ez.PayStubMaker.models.Stub;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.RoundingMode;
@@ -170,13 +172,17 @@ public class StubController {
 
     // /stubs/create route
     @GetMapping("create")
-    public String renderCreateStubForm() {
-
+    public String renderCreateStubForm(Model model) {
+        model.addAttribute(new Stub());
         return "stubs/create";
     }
 
     @PostMapping("create")
-    public String createStub(@ModelAttribute Stub newStub) {
+    public String createStub(@ModelAttribute @Valid Stub newStub, Errors errors) {
+        //Go back to form if there aee any errors
+        if(errors.hasErrors()){
+            return "stubs/create";
+        }
         stubs.add(newStub);
         return "redirect:/stubs";
     }

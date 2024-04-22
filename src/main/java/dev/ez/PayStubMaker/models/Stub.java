@@ -1,5 +1,10 @@
 package dev.ez.PayStubMaker.models;
 
+
+
+
+import jakarta.validation.constraints.NotBlank;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +17,7 @@ public class Stub {
     private String companyAddress;
     private String phoneNumber;
     private String companyEmail;
-    private String employee, employeeAddress, employeeId;
+    @NotBlank(message ="Employee name can't be elft blank when making paystub")private String employee, employeeAddress, employeeId;
     private String checkNumber;
     private String payPeriod;
     private String payPeriodBeginning;
@@ -47,6 +52,8 @@ public class Stub {
     private BigDecimal netPay;
     private BigDecimal YTDnetPay;
     //all are required fields so a constructor with all will do
+
+    public Stub() {}
     public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String employeeAddress, String employeeId, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, BigDecimal yearlyPreviousFed, BigDecimal yearlyPreviousState, BigDecimal yearlyPreviousSocSec, BigDecimal yearlyPreviousMedicare, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
         this.name = name;
         this.companyAddress = companyAddress;

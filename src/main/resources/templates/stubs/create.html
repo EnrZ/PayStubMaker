@@ -11,7 +11,6 @@
 
 <h1>Create Stub</h1>
 
-
 <form method="POST" action="/stubs/create">
     Company name <input type="text" name="name" value="Saint Louis Angelic Caregivers">
     <div style="clear:both"></div>
@@ -21,7 +20,8 @@
     <div style="clear:both"></div>
     Company Email  <input type="email" name="companyEmail">
     <div style="clear:both"></div>
-    Employee Name <input type="text" name="employee">
+    Employee Name <input th:field="${stub.employee}">
+    <p class="error" th:errors="${stub.employee}"></p>
     <div style="clear:both"></div>
     Employee Address <input type="text" name="employeeAddress">
     <div style="clear:both"></div>
