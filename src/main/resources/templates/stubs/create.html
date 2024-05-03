@@ -23,7 +23,8 @@
     Employee Name <input th:field="${stub.employee}">
     <p class="error" th:errors="${stub.employee}"></p>
     <div style="clear:both"></div>
-    Employee Address <input type="text" name="employeeAddress">
+    Employee Address <input th:field="${stub.employeeAddress}">
+    <p class="error" th:errors="${stub.employeeAddress}"></p>
     <div style="clear:both"></div>
     Employee ID <input type="text" name="employeeId">
     <div style="clear:both"></div>

@@ -17,7 +17,8 @@ public class Stub {
     private String companyAddress;
     private String phoneNumber;
     private String companyEmail;
-    @NotBlank(message ="Employee name can't be elft blank when making paystub")private String employee, employeeAddress, employeeId;
+    @NotBlank(message ="Employee name can't be left blank when making paystub")private String employee;
+    @NotBlank(message ="Employee address can't be left blank when making paystub") private String employeeAddress, employeeId;
     private String checkNumber;
     private String payPeriod;
     private String payPeriodBeginning;
