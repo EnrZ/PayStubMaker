@@ -3,7 +3,7 @@ package dev.ez.PayStubMaker.models;
 
 
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,16 +13,20 @@ public class Stub {
 
     private int id;
     private static int nextId = 1;
-    private String name;
-    private String companyAddress;
-    private String phoneNumber;
+    @NotBlank(message ="Company name can't be left blank when making paystub. Default value re-set")private String name;
+    @NotBlank(message ="Company address can't be left blank when making paystub")private String companyAddress;
+    @NotBlank(message ="Company phone number can't be left blank when making paystub. Default value re-set") private String phoneNumber;
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @NotBlank(message ="Company email can't be left blank when making paystub")
     private String companyEmail;
     @NotBlank(message ="Employee name can't be left blank when making paystub")private String employee;
-    @NotBlank(message ="Employee address can't be left blank when making paystub") private String employeeAddress, employeeId;
-    private String checkNumber;
-    private String payPeriod;
-    private String payPeriodBeginning;
-    private String payDay;
+    @NotBlank(message ="Employee address can't be left blank when making paystub") private String employeeAddress;
+
+    @NotBlank(message ="Employee ID can't be left blank when making paystub")  private String employeeId;
+    @NotBlank(message ="Check number can't be left blank when making paystub") private String checkNumber;
+    @NotBlank(message ="Pay period can't be left blank when making paystub") private String payPeriod;
+    @NotBlank(message ="Must select which day of the week pay period started")private String payPeriodBeginning;
+    @NotBlank(message ="Pay day can't be left blank when making paystub") private String payDay;
     private List<Integer> hoursWorkedEachDay = new ArrayList<>();
     private int hourlyPayRate;
     private BigDecimal yearlyPreviousGross, yearlyPreviousFed,yearlyPreviousState, yearlyPreviousSocSec, yearlyPreviousMedicare;
@@ -37,6 +41,8 @@ public class Stub {
     private int stateTaxFiling;
 
     private BigDecimal previousDeduction;
+    @Min(value = 14,message ="Must select length of the pay period 14-16")
+    @Max(value = 16,message ="Must select length of the pay period 14-16")
     private int daysLong;
 
     private BigDecimal previousNetPay;
