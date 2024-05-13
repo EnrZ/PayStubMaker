@@ -16,7 +16,6 @@ public class Stub {
     @NotBlank(message ="Company name can't be left blank when making paystub. Default value re-set")private String name;
     @NotBlank(message ="Company address can't be left blank when making paystub")private String companyAddress;
     @NotBlank(message ="Company phone number can't be left blank when making paystub. Default value re-set") private String phoneNumber;
-    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
     @NotBlank(message ="Company email can't be left blank when making paystub")
     private String companyEmail;
     @NotBlank(message ="Employee name can't be left blank when making paystub")private String employee;
@@ -41,7 +40,7 @@ public class Stub {
     private int stateTaxFiling;
 
     private BigDecimal previousDeduction;
-    @Min(value = 14,message ="Must select length of the pay period 14-16")
+    @Min(value = 7,message ="Must select length of the pay period 14-16")
     @Max(value = 16,message ="Must select length of the pay period 14-16")
     private int daysLong;
 
