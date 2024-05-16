@@ -88,13 +88,20 @@ public class StubController {
                 stub.setStateTax(stateTax);
 
                 federalTax = federalTaxFormula(stub.getFederalTaxFiling(), totalGrossIncome);
-                stub.setFederalTax(federalTax);
-            } else {
+                stub.setFederalTax(federalTax.setScale(2,RoundingMode.UP));
+            } else if (stub.getDaysLong() == 1){
+                    stateTax = stateTaxFormulaDaily(stub.getStateTaxFiling(), totalGrossIncome);
+                    stub.setStateTax(stateTax);
+
+                    federalTax = federalTaxFormulaDaily(stub.getFederalTaxFiling(), totalGrossIncome);
+                stub.setFederalTax(federalTax.setScale(2,RoundingMode.UP));
+                }
+             else {
                 stateTax = stateTaxFormulaWeekly(stub.getStateTaxFiling(), totalGrossIncome);
                 stub.setStateTax(stateTax);
 
                 federalTax = federalTaxFormulaWeekly(stub.getFederalTaxFiling(), totalGrossIncome);
-                stub.setFederalTax(federalTax);
+                stub.setFederalTax(federalTax.setScale(2,RoundingMode.UP));
             }
             //Fed and State YTD Calculations
             YTDFedCalculations = federalTax.add(stub.getYearlyPreviousFed());
@@ -936,5 +943,79 @@ public class StubController {
         }
     return result;
     }
+
+    private static BigDecimal federalTaxFormulaDaily(List<String> status, BigDecimal wages) {
+        BigDecimal result = null;
+        int WagesInt = wages.intValue();
+        if (status.get(0).equals(0)) {
+            //Filing status besides single/married filing combined etc. incorrect numbers
+
+            //Married Filing Jointly Standing withholding this is all semimonthly
+            if (status.get(1).equals(0)) {
+                if (WagesInt < 1215) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 1215 && WagesInt < 1230) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+            //Married Filing Jointly W4 etc.
+            if (status.get(1).equals(1)) {
+                if (WagesInt < 615) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 615 && WagesInt < 630) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+        }
+        if (status.get(0).equals(1)) {
+            //Head of Household Standing withholding
+            if (status.get(1).equals(0)) {
+                if (WagesInt < 915) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 915 && WagesInt < 930) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+            //Head of Household W4 etc.
+            if (status.get(1).equals(1)) {
+                if (WagesInt < 465) {
+                    result = BigDecimal.valueOf(0);
+                } else if (WagesInt >= 465 && WagesInt < 475) {
+                    result = BigDecimal.valueOf(1);
+                }
+            }
+
+        }
+        if (status.get(0).equals("s") || status.get(0).equals("sep")) {
+            //Single Standard withholding
+            if (status.get(1).equals("0")) {
+                result = (WagesInt < 55) ? BigDecimal.valueOf(0) : (WagesInt < 60) ? BigDecimal.valueOf(0.10) : (WagesInt < 65) ? BigDecimal.valueOf(0.60) :(WagesInt < 70) ? BigDecimal.valueOf(1.10) : (WagesInt < 75) ? BigDecimal.valueOf(1.60) : (WagesInt < 80) ? BigDecimal.valueOf(2.10) :(WagesInt < 85) ? BigDecimal.valueOf(2.60) : (WagesInt < 90) ? BigDecimal.valueOf(3.10) : (WagesInt < 95) ? BigDecimal.valueOf(3.60) :(WagesInt < 100) ? BigDecimal.valueOf(4.10) : (WagesInt < 105) ? BigDecimal.valueOf(4.70) :
+
+                                                                BigDecimal.valueOf(-1);
+
+            }
+            else if (status.get(1).equals("1")) {
+                //Single W4 etc.
+                result = (WagesInt < 30) ? BigDecimal.valueOf(0): (WagesInt < 35) ? BigDecimal.valueOf(0.40):(WagesInt < 40) ? BigDecimal.valueOf(0.90):(WagesInt < 45) ? BigDecimal.valueOf(1.40):(WagesInt < 50) ? BigDecimal.valueOf(1.90):(WagesInt < 55) ? BigDecimal.valueOf(2.50):(WagesInt < 60) ? BigDecimal.valueOf(3.10):(WagesInt < 65) ? BigDecimal.valueOf(3.70):(WagesInt < 70) ? BigDecimal.valueOf(4.30):(WagesInt < 75) ? BigDecimal.valueOf(4.90):(WagesInt < 80) ? BigDecimal.valueOf(5.50):(WagesInt < 85) ? BigDecimal.valueOf(6.10):(WagesInt < 90) ? BigDecimal.valueOf(6.70):(WagesInt < 95) ? BigDecimal.valueOf(7.30):
+
+                                                                        BigDecimal.valueOf(-1);
+            }
+        }
+        return result;
+    }
+
+    private static BigDecimal stateTaxFormulaDaily(int status, BigDecimal wages) {
+        BigDecimal result = null;
+        int MOWages = wages.intValue();
+
+        if (status == 0) {
+            //single,married filing etc.
+            result = (MOWages < 81) ? BigDecimal.valueOf(0) : (MOWages < 102) ? BigDecimal.valueOf(1) : (MOWages < 105) ? BigDecimal.valueOf(2) :
+
+                                    BigDecimal.valueOf(-1);
+        }
+        return result;
+    }
+
 }
 

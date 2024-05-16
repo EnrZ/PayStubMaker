@@ -40,7 +40,7 @@ public class Stub {
     private int stateTaxFiling;
 
     private BigDecimal previousDeduction;
-    @Min(value = 7,message ="Must select length of the pay period 14-16")
+    @Min(value = 1,message ="Must select length of the pay period 14-16")
     @Max(value = 16,message ="Must select length of the pay period 14-16")
     private int daysLong;
 
