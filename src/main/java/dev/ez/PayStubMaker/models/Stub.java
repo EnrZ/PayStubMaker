@@ -27,6 +27,7 @@ public class Stub {
     @NotBlank(message ="Must select which day of the week pay period started")private String payPeriodBeginning;
     @NotBlank(message ="Pay day can't be left blank when making paystub") private String payDay;
     private List<Integer> hoursWorkedEachDay = new ArrayList<>();
+    @Min(value = 10, message ="Hourly pay rate cant be less than 10 dollars in the pay stub")
     private int hourlyPayRate;
     private BigDecimal yearlyPreviousGross, yearlyPreviousFed,yearlyPreviousState, yearlyPreviousSocSec, yearlyPreviousMedicare;
 
@@ -36,15 +37,19 @@ public class Stub {
     //fed will be manual for now
     private BigDecimal federalTax;
     private BigDecimal stateTax;
+
     private List<String> federalTaxFiling = new ArrayList<>();
     private int stateTaxFiling;
-
+//Goal for later, fill YTD total gross, ytd fed, ytd, state, ytd soc sec, tyd med, prev deduction total and previous net pay
+    //values using the last completed paystub(persistence)
+@DecimalMin(value ="0.0", message ="Previous Deduction can't be less than zero")
     private BigDecimal previousDeduction;
-    @Min(value = 1,message ="Must select length of the pay period 14-16")
-    @Max(value = 16,message ="Must select length of the pay period 14-16")
+    @Min(value = 1,message ="Must select length of the pay period 1-16")
+    @Max(value = 16,message ="Must select length of the pay period 1-16")
     private int daysLong;
-
+    @DecimalMin(value ="0.0", message ="Previous net pay can't be less than zero")
     private BigDecimal previousNetPay;
+    @DecimalMin(value ="0.0", message ="YTD fields can't be less than zero")
     private BigDecimal YTDGrossIncome,YTDFed,YTDState,YTDSocSec,YTDMedicare;
     private int totalHours;
     private BigDecimal totalGrossIncome;
