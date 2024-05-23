@@ -22,7 +22,7 @@ public class Stub {
     @NotBlank(message ="Employee address can't be left blank when making paystub") private String employeeAddress;
 
     @NotBlank(message ="Employee ID can't be left blank when making paystub")  private String employeeId;
-    @NotBlank(message ="Check number can't be left blank when making paystub") private String checkNumber;
+    @NotBlank(message ="Payment type can't be left blank when making paystub") private String paymentNumber;
     @NotBlank(message ="Pay period can't be left blank when making paystub") private String payPeriod;
     @NotBlank(message ="Must select which day of the week pay period started")private String payPeriodBeginning;
     @NotBlank(message ="Pay day can't be left blank when making paystub") private String payDay;
@@ -70,7 +70,7 @@ public class Stub {
         this.companyAddress = companyAddress;
         this.companyEmail = companyEmail;
         this.employee = employee; this.employeeAddress = employeeAddress; this.employeeId = employeeId;
-        this.checkNumber = checkNumber;
+        this.paymentNumber = paymentNumber;
         this.payPeriod = payPeriod;
         this.payDay = payDay;
         this.hourlyPayRate = hourlyPayRate;
@@ -146,12 +146,12 @@ public class Stub {
         this.employeeId = employeeId;
     }
 
-    public String getCheckNumber() {
-        return checkNumber;
+    public String getPaymentNumber() {
+        return paymentNumber;
     }
 
-    public void setCheckNumber(String checkNumber) {
-        this.checkNumber = checkNumber;
+    public void setPaymentNumber(String paymentNumber) {
+        this.paymentNumber = paymentNumber;
     }
 
     public String getPayPeriod() {

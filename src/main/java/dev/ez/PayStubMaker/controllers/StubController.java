@@ -170,12 +170,12 @@ public class StubController {
         return "stubs/update";
     }
     @PostMapping("update")
-    public String createUpdatedStub(@RequestParam(value = "newCheckNumber", required = false) String newCheckNumber, @RequestParam("findId") int findId, @RequestParam(value = "newPayDay", required = false) String newPayDay) {
+    public String createUpdatedStub(@RequestParam(value = "newPaymentNumber", required = false) String newPaymentNumber, @RequestParam("findId") int findId, @RequestParam(value = "newPayDay", required = false) String newPayDay) {
 
         for (Stub stub : stubs) {
             if (stub.getId() == findId) {
-                if (newCheckNumber != null && !newCheckNumber.isEmpty()) {
-                    stub.setCheckNumber(newCheckNumber);
+                if (newPaymentNumber != null && !newPaymentNumber.isEmpty()) {
+                    stub.setPaymentNumber(newPaymentNumber);
                 }
                 if (newPayDay != null && !newPayDay.isEmpty()) {
                     stub.setPayDay(newPayDay);

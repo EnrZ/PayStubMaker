@@ -33,8 +33,8 @@
     Employee ID <input th:field="${stub.employeeId}">
     <p class="error" th:errors="${stub.employeeId}"></p>
     <div style="clear:both"></div>
-    Check Number <input th:field="${stub.checkNumber}">
-    <p class="error" th:errors="${stub.checkNumber}"></p>
+    Payment Type <input th:field="${stub.paymentNumber}">
+    <p class="error" th:errors="${stub.paymentNumber}"></p>
     <div style="clear:both"></div>
     Type in the specific pay period -> <input th:field="${stub.payPeriod}">
     <p class="error" th:errors="${stub.payPeriod}"></p>
@@ -58,7 +58,7 @@
     <select id="selectNumber" name="daysLong" onchange="createTextboxes()">
         <option disabled selected value> -- select an option -- </option>
         <option value="1">1 Daily  </option>
-        <option selected="selected" value="7">7 Weekly </option>
+        <option value="7">7 Weekly </option>
         <option value="14">14</option>
         <option value="15">15</option>
         <option value="16">16</option>
