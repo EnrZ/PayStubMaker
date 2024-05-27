@@ -1,5 +1,6 @@
 body {
 font-size: 20px;
+/*color: blue;*/
 -webkit-print-color-adjust:exact !important;
 print-color-adjust:exact !important;
 }
@@ -41,6 +42,7 @@ border-bottom: 1px solid #ddd; /* Add a bottom border to cells */
 }
 .table th {
     background-color: #C0C0C0;
+    /*background-color: #add8e6;*/
 }
 
 table[name="details"]{

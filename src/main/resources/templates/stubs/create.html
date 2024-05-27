@@ -15,13 +15,13 @@
     Company name <input input type="text" name="name" value="Saint Louis Angelic Caregivers">
     <p class="error" th:errors="${stub.name}"></p>
     <div style="clear:both"></div>
-    Company Address  <input th:field="${stub.companyAddress}">
+    Company Address  <input type="text" name="companyAddress">
     <p class="error" th:errors="${stub.companyAddress}"></p>
     <div style="clear:both"></div>
     Company Phone Number  <input type="tel" name="phoneNumber" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" value="(314)601-4345">
     <p class="error" th:errors="${stub.phoneNumber}"></p>
     <div style="clear:both"></div>
-    Company Email  <input th:field="${stub.companyEmail}">
+    Company Email  <input type="text" name="companyEmail">
     <p class="error" th:errors="${stub.companyEmail}"></p>
     <div style="clear:both"></div>
     Employee Name <input th:field="${stub.employee}">
@@ -33,7 +33,7 @@
     Employee ID <input th:field="${stub.employeeId}">
     <p class="error" th:errors="${stub.employeeId}"></p>
     <div style="clear:both"></div>
-    Payment Type <input th:field="${stub.paymentNumber}">
+    Payment Type <input type="text" name="paymentNumber" value="ePayment">
     <p class="error" th:errors="${stub.paymentNumber}"></p>
     <div style="clear:both"></div>
     Type in the specific pay period -> <input th:field="${stub.payPeriod}">
@@ -57,11 +57,7 @@
     <label for="selectNumber">Select Number of Days in this Pay Cycle:</label>
     <select id="selectNumber" name="daysLong" onchange="createTextboxes()">
         <option disabled selected value> -- select an option -- </option>
-        <option value="1">1 Daily  </option>
-        <option value="7">7 Weekly </option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
+        <option value="7" >7 Weekly </option>
     </select>
     <div id="textboxContainer">
         <!-- Textboxes will be dynamically added here -->

@@ -35,26 +35,34 @@ public class StubController {
             BigDecimal totalGrossIncome, YTDGrossIncome, socSecContribution, medicareContribution;
             BigDecimal hourlyPayRateConverted;
             BigDecimal federalTax, stateTax;
-            BigDecimal taxCalculations, contributionCalculations, deductionCalculations, currentTotalDeduction;
+            BigDecimal taxCalculations, contributionCalculations, deductionCalculations, currentTotalDeduction, regularCalculations, overtimeCalculations, overtimePayRate;
             BigDecimal YTDDeduction, YTDDeductionCalculations, netPay, netPayCalculations, YTDnetPay, YTDnetPayCalculations;
             BigDecimal YTDFedCalculations, YTDFed, YTDStateCalculations, YTDState, YTDSocSecCalculations, YTDSocSec, YTDMedicareCalculations, YTDMedicare;
 
             List<String> daysOfWeek = new ArrayList<>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
             String beginningDay;
-            int daysLong;
+            int daysLong, regularHours, overtimeHours;
 
 
             for (int num : stub.getHoursWorkedEachDay()) {
                 totalHours += num;
             }
 
+            regularHours = Math.min(totalHours, 40);
+            overtimeHours = Math.max(totalHours - 40, 0);
 
             stub.setTotalHours(totalHours);
 
 
-            hourlyPayRateConverted = BigDecimal.valueOf(stub.getHourlyPayRate());
 
-            TGICalculations = hourlyPayRateConverted.multiply(BigDecimal.valueOf(totalHours));
+
+            hourlyPayRateConverted = BigDecimal.valueOf(stub.getHourlyPayRate());
+            regularCalculations = hourlyPayRateConverted.multiply(BigDecimal.valueOf(regularHours));
+
+            overtimePayRate = BigDecimal.valueOf(1.5).multiply(hourlyPayRateConverted);
+            overtimeCalculations = overtimePayRate.multiply(BigDecimal.valueOf(overtimeHours));
+
+            TGICalculations = regularCalculations.add(overtimeCalculations);
             totalGrossIncome = TGICalculations.setScale(2, RoundingMode.HALF_UP);
 
             stub.setTotalGrossIncome(totalGrossIncome);
@@ -98,7 +106,7 @@ public class StubController {
                 }
              else {
                 stateTax = stateTaxFormulaWeekly(stub.getStateTaxFiling(), totalGrossIncome);
-                stub.setStateTax(stateTax);
+                stub.setStateTax(stateTax.setScale(2,RoundingMode.UP));
 
                 federalTax = federalTaxFormulaWeekly(stub.getFederalTaxFiling(), totalGrossIncome);
                 stub.setFederalTax(federalTax.setScale(2,RoundingMode.UP));
@@ -863,35 +871,43 @@ public class StubController {
     private static BigDecimal federalTaxFormulaWeekly(List<String> status, BigDecimal wages) {
         BigDecimal result = null;
         int WagesInt = wages.intValue();
-        if (status.get(0).equals(0)) {
+        if (status.get(0).equals("0")) {
             //Married Filing Jointly Standing withholding
-            if (status.get(1).equals(0)) {
-                if (WagesInt < 1215) {
-                    result = BigDecimal.valueOf(0);
-                } else if (WagesInt >= 1215 && WagesInt < 1230) {
-                    result = BigDecimal.valueOf(1);
-                }
+            if (status.get(1).equals("0")) {
+                result =  (WagesInt < 565) ? BigDecimal.valueOf(0) : (WagesInt < 575) ? BigDecimal.valueOf(1) : (WagesInt < 585) ? BigDecimal.valueOf(2) : (WagesInt < 595) ? BigDecimal.valueOf(3) : (WagesInt < 605) ? BigDecimal.valueOf(4) : (WagesInt < 615) ? BigDecimal.valueOf(5) :(WagesInt < 625) ? BigDecimal.valueOf(6) : (WagesInt < 635) ? BigDecimal.valueOf(7) : (WagesInt < 645) ? BigDecimal.valueOf(8) : (WagesInt < 655) ? BigDecimal.valueOf(9) : (WagesInt < 665) ? BigDecimal.valueOf(10) :(WagesInt < 675) ? BigDecimal.valueOf(11) : (WagesInt < 685) ? BigDecimal.valueOf(12) :
+                        (WagesInt < 695) ? BigDecimal.valueOf(13) : (WagesInt < 705) ? BigDecimal.valueOf(14) : (WagesInt < 715) ? BigDecimal.valueOf(15) :(WagesInt < 725) ? BigDecimal.valueOf(16) : (WagesInt < 735) ? BigDecimal.valueOf(17) :(WagesInt < 745) ? BigDecimal.valueOf(18) : (WagesInt < 755) ? BigDecimal.valueOf(19) : (WagesInt < 765) ? BigDecimal.valueOf(20) : (WagesInt < 775) ? BigDecimal.valueOf(21) :(WagesInt < 785) ? BigDecimal.valueOf(22) : (WagesInt < 795) ? BigDecimal.valueOf(23) : (WagesInt < 805) ? BigDecimal.valueOf(24) :(WagesInt < 815) ? BigDecimal.valueOf(25) : (WagesInt < 825) ? BigDecimal.valueOf(26) : (WagesInt < 835) ? BigDecimal.valueOf(27) :(WagesInt < 845) ? BigDecimal.valueOf(28) : (WagesInt < 855) ? BigDecimal.valueOf(29) : (WagesInt < 865) ? BigDecimal.valueOf(30) :(WagesInt < 875) ? BigDecimal.valueOf(31) : (WagesInt < 885) ? BigDecimal.valueOf(32) : (WagesInt < 895) ? BigDecimal.valueOf(33) :
+                                (WagesInt < 905) ? BigDecimal.valueOf(34) :(WagesInt < 915) ? BigDecimal.valueOf(35) : (WagesInt < 925) ? BigDecimal.valueOf(36) :(WagesInt < 935) ? BigDecimal.valueOf(37) :(WagesInt < 945) ? BigDecimal.valueOf(38) : (WagesInt < 955) ? BigDecimal.valueOf(39) : (WagesInt < 965) ? BigDecimal.valueOf(40) :(WagesInt < 975) ? BigDecimal.valueOf(41) : (WagesInt < 985) ? BigDecimal.valueOf(42) :(WagesInt < 995) ? BigDecimal.valueOf(43) : (WagesInt < 1005) ? BigDecimal.valueOf(44) :(WagesInt < 1015) ? BigDecimal.valueOf(45) : (WagesInt < 1025) ? BigDecimal.valueOf(46) :(WagesInt < 1035) ? BigDecimal.valueOf(47) : (WagesInt < 1045) ? BigDecimal.valueOf(48) :(WagesInt < 1055) ? BigDecimal.valueOf(50) : (WagesInt < 1065) ? BigDecimal.valueOf(51) :(WagesInt < 1075) ? BigDecimal.valueOf(52) : (WagesInt < 1085) ? BigDecimal.valueOf(53) :(WagesInt < 1095) ? BigDecimal.valueOf(54) : (WagesInt < 1105) ? BigDecimal.valueOf(56) :(WagesInt < 1115) ? BigDecimal.valueOf(57) : (WagesInt < 1125) ? BigDecimal.valueOf(58) :(WagesInt < 1135) ? BigDecimal.valueOf(59) : (WagesInt < 1145) ? BigDecimal.valueOf(60) :(WagesInt < 1155) ? BigDecimal.valueOf(62) : (WagesInt < 1165) ? BigDecimal.valueOf(63) :(WagesInt < 1175) ? BigDecimal.valueOf(64) : (WagesInt < 1185) ? BigDecimal.valueOf(65) :(WagesInt < 1195) ? BigDecimal.valueOf(66) :
+                                        (WagesInt < 1205) ? BigDecimal.valueOf(68) : (WagesInt < 1215) ? BigDecimal.valueOf(69) : (WagesInt < 1225) ? BigDecimal.valueOf(70) : (WagesInt < 1235) ? BigDecimal.valueOf(71) : (WagesInt < 1245) ? BigDecimal.valueOf(72) :(WagesInt < 1255) ? BigDecimal.valueOf(74) : (WagesInt < 1265) ? BigDecimal.valueOf(75) : (WagesInt < 1275) ? BigDecimal.valueOf(76) : (WagesInt < 1285) ? BigDecimal.valueOf(77) : (WagesInt < 1295) ? BigDecimal.valueOf(78) : (WagesInt < 1305) ? BigDecimal.valueOf(80) : (WagesInt < 1315) ? BigDecimal.valueOf(81) : (WagesInt < 1325) ? BigDecimal.valueOf(82) : (WagesInt < 1335) ? BigDecimal.valueOf(83) : (WagesInt < 1345) ? BigDecimal.valueOf(84) : (WagesInt < 1355) ? BigDecimal.valueOf(86) :
+                                                (WagesInt < 1365) ? BigDecimal.valueOf(87) :(WagesInt < 1375) ? BigDecimal.valueOf(88) :(WagesInt < 1385) ? BigDecimal.valueOf(89) : (WagesInt < 1395) ? BigDecimal.valueOf(90) : (WagesInt < 1405) ? BigDecimal.valueOf(92) : (WagesInt < 1415) ? BigDecimal.valueOf(93) : (WagesInt < 1425) ? BigDecimal.valueOf(94) :
+                                                        BigDecimal.valueOf(-1);
+
             }
             //Married Filing Jointly W4 etc.
-            if (status.get(1).equals(1)) {
-                if (WagesInt < 615) {
-                    result = BigDecimal.valueOf(0);
-                } else if (WagesInt >= 615 && WagesInt < 630) {
-                    result = BigDecimal.valueOf(1);
-                }
+            if (status.get(1).equals("1")) {
+                result = (WagesInt < 285) ? BigDecimal.valueOf(0) : (WagesInt < 295) ? BigDecimal.valueOf(1) : (WagesInt < 305) ? BigDecimal.valueOf(2) :(WagesInt < 315) ? BigDecimal.valueOf(3) : (WagesInt < 325) ? BigDecimal.valueOf(4) : (WagesInt < 335) ? BigDecimal.valueOf(5) :(WagesInt < 345) ? BigDecimal.valueOf(6) : (WagesInt < 355) ? BigDecimal.valueOf(7) : (WagesInt < 365) ? BigDecimal.valueOf(8) :(WagesInt < 375) ? BigDecimal.valueOf(9) : (WagesInt < 385) ? BigDecimal.valueOf(10) : (WagesInt < 395) ? BigDecimal.valueOf(11) :(WagesInt < 405) ? BigDecimal.valueOf(12) : (WagesInt < 415) ? BigDecimal.valueOf(13) : (WagesInt < 425) ? BigDecimal.valueOf(14) :(WagesInt < 435) ? BigDecimal.valueOf(15) : (WagesInt < 445) ? BigDecimal.valueOf(16) : (WagesInt < 455) ? BigDecimal.valueOf(17) :(WagesInt < 465) ? BigDecimal.valueOf(18) : (WagesInt < 475) ? BigDecimal.valueOf(19) : (WagesInt < 485) ? BigDecimal.valueOf(20) :(WagesInt < 495) ? BigDecimal.valueOf(21) :
+                        (WagesInt < 505) ? BigDecimal.valueOf(22) : (WagesInt < 515) ? BigDecimal.valueOf(23) :(WagesInt < 525) ? BigDecimal.valueOf(24) : (WagesInt < 535) ? BigDecimal.valueOf(25) : (WagesInt < 545) ? BigDecimal.valueOf(27) : (WagesInt < 555) ? BigDecimal.valueOf(28) : (WagesInt < 565) ? BigDecimal.valueOf(29) :(WagesInt < 575) ? BigDecimal.valueOf(30) : (WagesInt < 585) ? BigDecimal.valueOf(31) : (WagesInt < 595) ? BigDecimal.valueOf(33) : (WagesInt < 605) ? BigDecimal.valueOf(34) : (WagesInt < 615) ? BigDecimal.valueOf(35) :(WagesInt < 625) ? BigDecimal.valueOf(36) : (WagesInt < 635) ? BigDecimal.valueOf(37) : (WagesInt < 645) ? BigDecimal.valueOf(39) : (WagesInt < 655) ? BigDecimal.valueOf(40) : (WagesInt < 665) ? BigDecimal.valueOf(41) :(WagesInt < 675) ? BigDecimal.valueOf(42) : (WagesInt < 685) ? BigDecimal.valueOf(43) :
+                                (WagesInt < 695) ? BigDecimal.valueOf(45) : (WagesInt < 705) ? BigDecimal.valueOf(46) : (WagesInt < 715) ? BigDecimal.valueOf(47) :(WagesInt < 725) ? BigDecimal.valueOf(48) : (WagesInt < 735) ? BigDecimal.valueOf(49) :(WagesInt < 745) ? BigDecimal.valueOf(51) : (WagesInt < 755) ? BigDecimal.valueOf(52) : (WagesInt < 765) ? BigDecimal.valueOf(53) : (WagesInt < 775) ? BigDecimal.valueOf(54) :(WagesInt < 785) ? BigDecimal.valueOf(55) : (WagesInt < 795) ? BigDecimal.valueOf(57) : (WagesInt < 805) ? BigDecimal.valueOf(58) :(WagesInt < 815) ? BigDecimal.valueOf(59) : (WagesInt < 825) ? BigDecimal.valueOf(60) : (WagesInt < 835) ? BigDecimal.valueOf(61) :(WagesInt < 845) ? BigDecimal.valueOf(63) : (WagesInt < 855) ? BigDecimal.valueOf(64) : (WagesInt < 865) ? BigDecimal.valueOf(65) :(WagesInt < 875) ? BigDecimal.valueOf(66) : (WagesInt < 885) ? BigDecimal.valueOf(67) : (WagesInt < 895) ? BigDecimal.valueOf(69) :
+                                        (WagesInt < 905) ? BigDecimal.valueOf(70) :(WagesInt < 915) ? BigDecimal.valueOf(71) : (WagesInt < 925) ? BigDecimal.valueOf(72) :(WagesInt < 935) ? BigDecimal.valueOf(73) :(WagesInt < 945) ? BigDecimal.valueOf(75) : (WagesInt < 955) ? BigDecimal.valueOf(76) : (WagesInt < 965) ? BigDecimal.valueOf(77) :(WagesInt < 975) ? BigDecimal.valueOf(78) : (WagesInt < 985) ? BigDecimal.valueOf(79) :(WagesInt < 995) ? BigDecimal.valueOf(81) : (WagesInt < 1005) ? BigDecimal.valueOf(82) :(WagesInt < 1015) ? BigDecimal.valueOf(83) : (WagesInt < 1025) ? BigDecimal.valueOf(84) :(WagesInt < 1035) ? BigDecimal.valueOf(85) : (WagesInt < 1045) ? BigDecimal.valueOf(87) :(WagesInt < 1055) ? BigDecimal.valueOf(88) : (WagesInt < 1065) ? BigDecimal.valueOf(89) :(WagesInt < 1075) ? BigDecimal.valueOf(90) : (WagesInt < 1085) ? BigDecimal.valueOf(91) :(WagesInt < 1095) ? BigDecimal.valueOf(93) : (WagesInt < 1105) ? BigDecimal.valueOf(94) :(WagesInt < 1115) ? BigDecimal.valueOf(95) : (WagesInt < 1125) ? BigDecimal.valueOf(96) :(WagesInt < 1135) ? BigDecimal.valueOf(97) : (WagesInt < 1145) ? BigDecimal.valueOf(99) :(WagesInt < 1155) ? BigDecimal.valueOf(100) : (WagesInt < 1165) ? BigDecimal.valueOf(101) :(WagesInt < 1175) ? BigDecimal.valueOf(102) : (WagesInt < 1185) ? BigDecimal.valueOf(103) :(WagesInt < 1195) ? BigDecimal.valueOf(105) :
+                                                (WagesInt < 1205) ? BigDecimal.valueOf(107) : (WagesInt < 1215) ? BigDecimal.valueOf(109) : (WagesInt < 1225) ? BigDecimal.valueOf(111) : (WagesInt < 1235) ? BigDecimal.valueOf(114) : (WagesInt < 1245) ? BigDecimal.valueOf(116) :(WagesInt < 1255) ? BigDecimal.valueOf(118) : (WagesInt < 1265) ? BigDecimal.valueOf(120) : (WagesInt < 1275) ? BigDecimal.valueOf(122) : (WagesInt < 1285) ? BigDecimal.valueOf(125) : (WagesInt < 1295) ? BigDecimal.valueOf(127) : (WagesInt < 1305) ? BigDecimal.valueOf(129) : (WagesInt < 1315) ? BigDecimal.valueOf(131) : (WagesInt < 1325) ? BigDecimal.valueOf(133) : (WagesInt < 1335) ? BigDecimal.valueOf(136) : (WagesInt < 1345) ? BigDecimal.valueOf(138) : (WagesInt < 1355) ? BigDecimal.valueOf(140) :
+                                                        (WagesInt < 1365) ? BigDecimal.valueOf(142) :(WagesInt < 1375) ? BigDecimal.valueOf(144) :(WagesInt < 1385) ? BigDecimal.valueOf(147) : (WagesInt < 1395) ? BigDecimal.valueOf(149) : (WagesInt < 1405) ? BigDecimal.valueOf(151) : (WagesInt < 1415) ? BigDecimal.valueOf(153) : (WagesInt < 1425) ? BigDecimal.valueOf(155) :
+                                                                //left off end of page 14 fed tax pdf
+                                                                BigDecimal.valueOf(-1);
             }
         }
-        if (status.get(0).equals(1)) {
+        if (status.get(0).equals("1")) {
             //Head of Household Standing withholding
-            if (status.get(1).equals(0)) {
-                if (WagesInt < 915) {
-                    result = BigDecimal.valueOf(0);
-                } else if (WagesInt >= 915 && WagesInt < 930) {
-                    result = BigDecimal.valueOf(1);
-                }
+            if (status.get(1).equals("0")) {
+                result = (WagesInt < 425) ? BigDecimal.valueOf(0) :(WagesInt < 435) ? BigDecimal.valueOf(1) : (WagesInt < 445) ? BigDecimal.valueOf(2) : (WagesInt < 455) ? BigDecimal.valueOf(3) :(WagesInt < 465) ? BigDecimal.valueOf(4) : (WagesInt < 475) ? BigDecimal.valueOf(5) : (WagesInt < 485) ? BigDecimal.valueOf(6) :(WagesInt < 495) ? BigDecimal.valueOf(7) :
+                        (WagesInt < 505) ? BigDecimal.valueOf(8) : (WagesInt < 515) ? BigDecimal.valueOf(9) :(WagesInt < 525) ? BigDecimal.valueOf(10) : (WagesInt < 535) ? BigDecimal.valueOf(11) : (WagesInt < 545) ? BigDecimal.valueOf(12) : (WagesInt < 555) ? BigDecimal.valueOf(13) : (WagesInt < 565) ? BigDecimal.valueOf(14) :(WagesInt < 575) ? BigDecimal.valueOf(15) : (WagesInt < 585) ? BigDecimal.valueOf(16) : (WagesInt < 595) ? BigDecimal.valueOf(17) : (WagesInt < 605) ? BigDecimal.valueOf(19) : (WagesInt < 615) ? BigDecimal.valueOf(19) :(WagesInt < 625) ? BigDecimal.valueOf(20) : (WagesInt < 635) ? BigDecimal.valueOf(21) : (WagesInt < 645) ? BigDecimal.valueOf(22) : (WagesInt < 655) ? BigDecimal.valueOf(23) : (WagesInt < 665) ? BigDecimal.valueOf(24) :(WagesInt < 675) ? BigDecimal.valueOf(25) : (WagesInt < 685) ? BigDecimal.valueOf(26) :
+                                (WagesInt < 695) ? BigDecimal.valueOf(27) : (WagesInt < 705) ? BigDecimal.valueOf(28) : (WagesInt < 715) ? BigDecimal.valueOf(29) :(WagesInt < 725) ? BigDecimal.valueOf(30) : (WagesInt < 735) ? BigDecimal.valueOf(31) :(WagesInt < 745) ? BigDecimal.valueOf(32) : (WagesInt < 755) ? BigDecimal.valueOf(33) : (WagesInt < 765) ? BigDecimal.valueOf(34) : (WagesInt < 775) ? BigDecimal.valueOf(35) :(WagesInt < 785) ? BigDecimal.valueOf(37) : (WagesInt < 795) ? BigDecimal.valueOf(38) : (WagesInt < 805) ? BigDecimal.valueOf(39) :(WagesInt < 815) ? BigDecimal.valueOf(40) : (WagesInt < 825) ? BigDecimal.valueOf(41) : (WagesInt < 835) ? BigDecimal.valueOf(43) :(WagesInt < 845) ? BigDecimal.valueOf(44) : (WagesInt < 855) ? BigDecimal.valueOf(45) : (WagesInt < 865) ? BigDecimal.valueOf(46) :(WagesInt < 875) ? BigDecimal.valueOf(47) : (WagesInt < 885) ? BigDecimal.valueOf(49) : (WagesInt < 895) ? BigDecimal.valueOf(50) :
+                                        (WagesInt < 905) ? BigDecimal.valueOf(51) :(WagesInt < 915) ? BigDecimal.valueOf(52) : (WagesInt < 925) ? BigDecimal.valueOf(53) :(WagesInt < 935) ? BigDecimal.valueOf(55) :(WagesInt < 945) ? BigDecimal.valueOf(56) : (WagesInt < 955) ? BigDecimal.valueOf(57) : (WagesInt < 965) ? BigDecimal.valueOf(58) :(WagesInt < 975) ? BigDecimal.valueOf(59) : (WagesInt < 985) ? BigDecimal.valueOf(61) :(WagesInt < 995) ? BigDecimal.valueOf(62) : (WagesInt < 1005) ? BigDecimal.valueOf(63) :(WagesInt < 1015) ? BigDecimal.valueOf(64) : (WagesInt < 1025) ? BigDecimal.valueOf(65) :(WagesInt < 1035) ? BigDecimal.valueOf(67) : (WagesInt < 1045) ? BigDecimal.valueOf(68) :(WagesInt < 1055) ? BigDecimal.valueOf(69) : (WagesInt < 1065) ? BigDecimal.valueOf(70) :(WagesInt < 1075) ? BigDecimal.valueOf(71) : (WagesInt < 1085) ? BigDecimal.valueOf(73) :(WagesInt < 1095) ? BigDecimal.valueOf(74) : (WagesInt < 1105) ? BigDecimal.valueOf(75) :(WagesInt < 1115) ? BigDecimal.valueOf(76) : (WagesInt < 1125) ? BigDecimal.valueOf(77) :(WagesInt < 1135) ? BigDecimal.valueOf(79) : (WagesInt < 1145) ? BigDecimal.valueOf(80) :(WagesInt < 1155) ? BigDecimal.valueOf(81) : (WagesInt < 1165) ? BigDecimal.valueOf(82) :(WagesInt < 1175) ? BigDecimal.valueOf(83) : (WagesInt < 1185) ? BigDecimal.valueOf(85) :(WagesInt < 1195) ? BigDecimal.valueOf(86) :
+                                                (WagesInt < 1205) ? BigDecimal.valueOf(87) : (WagesInt < 1215) ? BigDecimal.valueOf(88) : (WagesInt < 1225) ? BigDecimal.valueOf(89) : (WagesInt < 1235) ? BigDecimal.valueOf(91) : (WagesInt < 1245) ? BigDecimal.valueOf(92) :(WagesInt < 1255) ? BigDecimal.valueOf(93) : (WagesInt < 1265) ? BigDecimal.valueOf(94) : (WagesInt < 1275) ? BigDecimal.valueOf(95) : (WagesInt < 1285) ? BigDecimal.valueOf(97) : (WagesInt < 1295) ? BigDecimal.valueOf(98) : (WagesInt < 1305) ? BigDecimal.valueOf(99) : (WagesInt < 1315) ? BigDecimal.valueOf(100) : (WagesInt < 1325) ? BigDecimal.valueOf(101) : (WagesInt < 1335) ? BigDecimal.valueOf(103) : (WagesInt < 1345) ? BigDecimal.valueOf(104) : (WagesInt < 1355) ? BigDecimal.valueOf(105) :
+                                                        (WagesInt < 1365) ? BigDecimal.valueOf(106) :(WagesInt < 1375) ? BigDecimal.valueOf(107) :(WagesInt < 1385) ? BigDecimal.valueOf(109) : (WagesInt < 1395) ? BigDecimal.valueOf(110) : (WagesInt < 1405) ? BigDecimal.valueOf(111) : (WagesInt < 1415) ? BigDecimal.valueOf(112) : (WagesInt < 1425) ? BigDecimal.valueOf(113) :
+                                                                //left off end of page 14 fed tax pdf
+                                                                BigDecimal.valueOf(-1);
             }
             //Head of Household W4 etc.
-            if (status.get(1).equals(1)) {
+            if (status.get(1).equals("1")) {
                 if (WagesInt < 465) {
                     result = BigDecimal.valueOf(0);
                 } else if (WagesInt >= 465 && WagesInt < 475) {
