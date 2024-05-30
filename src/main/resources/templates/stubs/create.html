@@ -15,13 +15,13 @@
     Company name <input input type="text" name="name" value="Saint Louis Angelic Caregivers">
     <p class="error" th:errors="${stub.name}"></p>
     <div style="clear:both"></div>
-    Company Address  <input type="text" name="companyAddress">
+    Company Address  <input type="text" name="companyAddress" value="735 Avenue H, St. Louis MO 63125">
     <p class="error" th:errors="${stub.companyAddress}"></p>
     <div style="clear:both"></div>
     Company Phone Number  <input type="tel" name="phoneNumber" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" value="(314)601-4345">
     <p class="error" th:errors="${stub.phoneNumber}"></p>
     <div style="clear:both"></div>
-    Company Email  <input type="text" name="companyEmail">
+    Company Email  <input type="text" name="companyEmail" value="linda@stlangelcare.com">
     <p class="error" th:errors="${stub.companyEmail}"></p>
     <div style="clear:both"></div>
     Employee Name <input th:field="${stub.employee}">
