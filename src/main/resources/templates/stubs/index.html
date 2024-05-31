@@ -71,24 +71,26 @@
     <tr>
         <th>Total Hours</th>
         <th>Hourly Pay Rate</th>
-        <th>Total Gross Income</th>
+        <th th:if="${stub.holidayHours > 0}">Holiday Hours</th>
     </tr>
     </thead>
     <tr>
         <td th:text="${stub.totalHours}"></td>
         <td th:text="${stub.hourlyPayRate}"></td>
-        <td th:text="${stub.totalGrossIncome}"></td>
+        <td th:if="${stub.holidayHours > 0}" th:text="${stub.holidayHours}"></td>
     </tr>
 </table>
 
 <table class="table" name="MoneyInfo">
     <thead>
     <tr>
+        <th>Total Gross Income</th>
         <th>Yearly Previous Gross Income</th>
         <th>Year-to-Date Gross Income</th>
     </tr>
     </thead>
     <tr>
+        <td th:text="${stub.totalGrossIncome}"></td>
         <td th:text="${stub.yearlyPreviousGross}"></td>
         <td th:text="${stub.YTDGrossIncome}"></td>
     </tr>
