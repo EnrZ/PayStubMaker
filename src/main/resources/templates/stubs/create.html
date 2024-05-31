@@ -15,13 +15,13 @@
     Company name <input input type="text" name="name" value="Saint Louis Angelic Caregivers">
     <p class="error" th:errors="${stub.name}"></p>
     <div style="clear:both"></div>
-    Company Address  <input type="text" name="companyAddress" value="735 Avenue H, St. Louis MO 63125">
+    Company Address  <input type="text" name="companyAddress">
     <p class="error" th:errors="${stub.companyAddress}"></p>
     <div style="clear:both"></div>
     Company Phone Number  <input type="tel" name="phoneNumber" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" value="(314)601-4345">
     <p class="error" th:errors="${stub.phoneNumber}"></p>
     <div style="clear:both"></div>
-    Company Email  <input type="text" name="companyEmail" value="linda@stlangelcare.com">
+    Company Email  <input type="text" name="companyEmail">
     <p class="error" th:errors="${stub.companyEmail}"></p>
     <div style="clear:both"></div>
     Employee Name <input th:field="${stub.employee}">
@@ -38,6 +38,8 @@
     <div style="clear:both"></div>
     Type in the specific pay period -> <input th:field="${stub.payPeriod}">
     <p class="error" th:errors="${stub.payPeriod}"></p>
+    <div style="clear:both"></div>
+    How many hours in this pay period were holiday hours?????? Type that here ->>> <input type="number" step="0.1" name="holidayHours">
     <div style="clear:both"></div>
     On what day of the week did the pay period begin?  <select name = "payPeriodBeginning">
         <option disabled selected value> -- select an option -- </option>

@@ -62,10 +62,12 @@ public class Stub {
     private BigDecimal YTDDeduction;
     private BigDecimal netPay;
     private BigDecimal YTDnetPay;
+    @DecimalMin(value ="0.0", message ="Holiday hours can't be less than zero")
+    private BigDecimal holidayHours;
     //all are required fields so a constructor with all will do
 
     public Stub() {}
-    public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String employeeAddress, String employeeId, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, BigDecimal yearlyPreviousFed, BigDecimal yearlyPreviousState, BigDecimal yearlyPreviousSocSec, BigDecimal yearlyPreviousMedicare, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay) {
+    public Stub(String name,String companyAddress, String phoneNumber,String companyEmail,String employee, String employeeAddress, String employeeId, String checkNumber, String payPeriod,String payPeriodBeginning, String payDate, List<Integer> hoursWorkedEachDay, int hourlyPayRate, BigDecimal yearlyPreviousGross, BigDecimal yearlyPreviousFed, BigDecimal yearlyPreviousState, BigDecimal yearlyPreviousSocSec, BigDecimal yearlyPreviousMedicare, List<Integer> startTime, BigDecimal federalTax, int stateTaxFiling, BigDecimal previousDeductions, int daysLong,BigDecimal previousNetPay, BigDecimal holidayHours) {
         this.name = name;
         this.companyAddress = companyAddress;
         this.companyEmail = companyEmail;
@@ -89,12 +91,21 @@ public class Stub {
         this.totalGrossIncome = totalGrossIncome;
         this.updatedDays = updatedDays;
         this.phoneNumber = phoneNumber;
+        this.holidayHours = holidayHours;
 
+        //needs to be changed for updated stub to work
         this.id = nextId;
         nextId++;
 
     }
 
+    public BigDecimal getHolidayHours() {
+        return holidayHours;
+    }
+
+    public void setHolidayHours(BigDecimal holidayHours) {
+        this.holidayHours = holidayHours;
+    }
 
     public String getName() {
         return name;

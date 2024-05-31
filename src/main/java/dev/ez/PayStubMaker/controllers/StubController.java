@@ -38,6 +38,7 @@ public class StubController {
             BigDecimal taxCalculations, contributionCalculations, deductionCalculations, currentTotalDeduction, regularCalculations, overtimeCalculations, overtimePayRate;
             BigDecimal YTDDeduction, YTDDeductionCalculations, netPay, netPayCalculations, YTDnetPay, YTDnetPayCalculations;
             BigDecimal YTDFedCalculations, YTDFed, YTDStateCalculations, YTDState, YTDSocSecCalculations, YTDSocSec, YTDMedicareCalculations, YTDMedicare;
+            BigDecimal holidayHours, holidayPay,extraPay;
 
             List<String> daysOfWeek = new ArrayList<>(Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"));
             String beginningDay;
@@ -53,9 +54,6 @@ public class StubController {
 
             stub.setTotalHours(totalHours);
 
-
-
-
             hourlyPayRateConverted = BigDecimal.valueOf(stub.getHourlyPayRate());
             regularCalculations = hourlyPayRateConverted.multiply(BigDecimal.valueOf(regularHours));
 
@@ -64,6 +62,15 @@ public class StubController {
 
             TGICalculations = regularCalculations.add(overtimeCalculations);
             totalGrossIncome = TGICalculations.setScale(2, RoundingMode.HALF_UP);
+
+            //Accounting for holiday time paid
+            holidayHours = stub.getHolidayHours();
+            if(holidayHours.compareTo(BigDecimal.ZERO) > 0){
+                //adding the .5 in 1.5 pay to the totalGrossIncome if there is holiday day
+                extraPay = BigDecimal.valueOf(.5).multiply(hourlyPayRateConverted);
+                holidayPay = extraPay.multiply(holidayHours);
+                totalGrossIncome = totalGrossIncome.add(holidayPay);
+            }
 
             stub.setTotalGrossIncome(totalGrossIncome);
 
