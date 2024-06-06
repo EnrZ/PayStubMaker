@@ -878,7 +878,7 @@ public class StubController {
     private static BigDecimal federalTaxFormulaWeekly(List<String> status, BigDecimal wages) {
         BigDecimal result = null;
         int WagesInt = wages.intValue();
-        if (status.get(0).equals("0")) {
+        if (status.get(0).equals("m jointly")) {
             //Married Filing Jointly Standing withholding
             if (status.get(1).equals("0")) {
                 result =  (WagesInt < 565) ? BigDecimal.valueOf(0) : (WagesInt < 575) ? BigDecimal.valueOf(1) : (WagesInt < 585) ? BigDecimal.valueOf(2) : (WagesInt < 595) ? BigDecimal.valueOf(3) : (WagesInt < 605) ? BigDecimal.valueOf(4) : (WagesInt < 615) ? BigDecimal.valueOf(5) :(WagesInt < 625) ? BigDecimal.valueOf(6) : (WagesInt < 635) ? BigDecimal.valueOf(7) : (WagesInt < 645) ? BigDecimal.valueOf(8) : (WagesInt < 655) ? BigDecimal.valueOf(9) : (WagesInt < 665) ? BigDecimal.valueOf(10) :(WagesInt < 675) ? BigDecimal.valueOf(11) : (WagesInt < 685) ? BigDecimal.valueOf(12) :
@@ -905,7 +905,7 @@ public class StubController {
                                                                 BigDecimal.valueOf(-1);
             }
         }
-        if (status.get(0).equals("1")) {
+        if (status.get(0).equals("h")) {
             //Head of Household Standing withholding
             if (status.get(1).equals("0")) {
                 result = (WagesInt < 425) ? BigDecimal.valueOf(0) :(WagesInt < 435) ? BigDecimal.valueOf(1) : (WagesInt < 445) ? BigDecimal.valueOf(2) : (WagesInt < 455) ? BigDecimal.valueOf(3) :(WagesInt < 465) ? BigDecimal.valueOf(4) : (WagesInt < 475) ? BigDecimal.valueOf(5) : (WagesInt < 485) ? BigDecimal.valueOf(6) :(WagesInt < 495) ? BigDecimal.valueOf(7) :
@@ -934,7 +934,7 @@ public class StubController {
             }
 
         }
-        if (status.get(0).equals("s") || status.get(0).equals("sep")) {
+        if (status.get(0).equals("s") || status.get(0).equals("m separately")) {
             //Single Standard withholding
             if (status.get(1).equals("0")) {
                 result = (WagesInt < 285) ? BigDecimal.valueOf(0) : (WagesInt < 295) ? BigDecimal.valueOf(1) : (WagesInt < 305) ? BigDecimal.valueOf(2) :(WagesInt < 315) ? BigDecimal.valueOf(3) : (WagesInt < 325) ? BigDecimal.valueOf(4) : (WagesInt < 335) ? BigDecimal.valueOf(5) :(WagesInt < 345) ? BigDecimal.valueOf(6) : (WagesInt < 355) ? BigDecimal.valueOf(7) : (WagesInt < 365) ? BigDecimal.valueOf(8) :(WagesInt < 375) ? BigDecimal.valueOf(9) : (WagesInt < 385) ? BigDecimal.valueOf(10) : (WagesInt < 395) ? BigDecimal.valueOf(11) :(WagesInt < 405) ? BigDecimal.valueOf(12) : (WagesInt < 415) ? BigDecimal.valueOf(13) : (WagesInt < 425) ? BigDecimal.valueOf(14) :(WagesInt < 435) ? BigDecimal.valueOf(15) : (WagesInt < 445) ? BigDecimal.valueOf(16) : (WagesInt < 455) ? BigDecimal.valueOf(17) :(WagesInt < 465) ? BigDecimal.valueOf(18) : (WagesInt < 475) ? BigDecimal.valueOf(19) : (WagesInt < 485) ? BigDecimal.valueOf(20) :(WagesInt < 495) ? BigDecimal.valueOf(21) :
